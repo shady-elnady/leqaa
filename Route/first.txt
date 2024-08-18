@@ -1,0 +1,12 @@
+
+GET|HEAD   / .............................................................................................................................................
+GET|HEAD   api/user ......................................................................................................................................
+POST       email/verification-notification ........................................ verification.send › Auth\EmailVerificationNotificationController@store
+POST       forgot-password ....................................................................... password.email › Auth\PasswordResetLinkController@store
+POST       login ....................................................................................... login › Auth\AuthenticatedSessionController@store
+POST       logout ................................................................................... logout › Auth\AuthenticatedSessionController@destroy
+POST       register ....................................................................................... register › Auth\RegisteredUserController@store
+POST       reset-password .............................................................................. password.store › Auth\NewPasswordController@store
+GET|HEAD   sanctum/csrf-cookie ......................................................... sanctum.csrf-cookie › Laravel\Sanctum › CsrfCookieController@show
+GET|HEAD   up ............................................................................................................................................
+GET|HEAD   verify-email/{id}/{hash} ..................................................................... verification.verify › Auth\VerifyEmailController

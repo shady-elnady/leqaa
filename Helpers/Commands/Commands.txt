@@ -1,0 +1,148 @@
+Laravel-ui:
+    composer require laravel/ui --dev
+    php artisan ui bootstrap --auth
+
+E-Mail: (https://www.itsolutionstuff.com/post/how-to-send-email-using-gmail-in-laravel-11example.html)
+    php artisan make:mail DemoMail
+    php artisan make:controller MailController
+
+HMCV:  ( https://laravelmodules.com/docs/v11/installation-and-setup )
+    composer require nwidart/laravel-modules
+    php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"
+    // in composer.json
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        },
+        "merge-plugin": {
+            "include": [
+                "Modules/*/composer.json"
+            ]
+        }
+    },
+
+    composer dump-autoload
+    (https://nwidart.com/laravel-modules/v6/advanced-tools/artisan-commands)
+    // php artisan module:make Packing Payment Setting Locale Theme Auth Shipment
+    php artisan module:make Warehousing
+    //
+
+
+    // migrate
+    php artisan module:migrate Locale
+    php artisan module:migrate Payment
+    php artisan module:migrate Theme
+    php artisan module:migrate Setting
+    php artisan module:migrate Shipment
+
+    //
+    php artisan db:seed
+    php artisan module:seed Warehousing
+
+livewire :
+     php artisan make:livewire shipment
+
+
+Laravel-ui:
+    composer require laravel/ui --dev
+    php artisan ui bootstrap --auth
+
+E-Mail: (https://www.itsolutionstuff.com/post/how-to-send-email-using-gmail-in-laravel-11example.html)
+    php artisan make:mail DemoMail
+    php artisan make:controller MailController
+
+HMCV:  ( https://laravelmodules.com/docs/v11/installation-and-setup )
+    composer require nwidart/laravel-modules
+
+    php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider" --tag="config"
+    php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider" --tag="stubs"
+    php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider" --tag="vite"
+
+    // in composer.json
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        },
+        "merge-plugin": {
+            "include": [
+                "Modules/*/composer.json"
+            ]
+        }
+    },
+
+    composer dump-autoload
+    (https://nwidart.com/laravel-modules/v6/advanced-tools/artisan-commands)
+    // php artisan module:make Packing Payment Setting Locale Theme Auth Shipment
+    php artisan module:make Warehousing
+    //
+    // Generate Global Models :
+        php artisan make:model Locale -a
+        php artisan make:model EntityTranslation -a
+        php artisan make:model EntityContact -a
+        php artisan make:model WebSetting -a
+        php artisan make:model Currency -a
+    // Generate Models for Module Warehousing
+        php artisan module:make-model Category Warehousing -mcsfr
+        php artisan module:make-model Nationality Warehousing -mcsfr
+        php artisan module:make-model Supplier Warehousing -mcsfr --fillable=name,email
+        php artisan module:make-model Branch Warehousing -mcsfr
+        php artisan module:make-model Store Warehousing -mcsfr --fillable=branch_id
+        php artisan module:make-model PaymentMethod Warehousing -mcsfr
+        php artisan module:make-model PaymentStatus Warehousing -mcsfr
+        php artisan module:make-model Shipment Warehousing -mcsfr --fillable=category_id,nationality_id,supplier_id,store_id,payment_method_id,payment_status_id,currency_id,weight_total,weight_wet,weight_dry,price
+        php artisan module:make-model ShipmentFile Warehousing -mcsfr --fillable=shipment_id,file_url
+        php artisan module:make-model Cost Warehousing -mcsfr --fillable=amount,currency_id,shipment_id
+        php artisan module:make-model PaymentStatusFeild Warehousing -mcsfr --fillable=payment_status_id
+        php artisan module:make-model ShipmentPaymentDetail Warehousing -mcsfr --fillable=payment_status_filed_id,shipment_id
+
+        php artisan module:make-migration add_currency_id_to_lkp_shipment_table Warehousing
+
+    // migrate
+    php artisan module:migrate Locale
+    php artisan module:migrate Payment
+    php artisan module:migrate Theme
+    php artisan module:migrate Setting
+    php artisan module:migrate Shipment
+
+    //
+    php artisan db:seed
+    php artisan module:seed Warehousing
+
+livewire :
+     php artisan make:livewire shipment
+
+Breeze :
+    composer require laravel/breeze --dev
+    php artisan breeze:install
+    php artisan migrate
+    npm install
+    npm run dev
+
+livewire:
+    composer require livewire/livewire
+    php artisan livewire:publish --config
+    php artisan livewire:publish --assets
+
+    {
+        "scripts": {
+            "post-autoload-dump": [
+                "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+                "@php artisan package:discover --ansi",
+                "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
+            ]
+        }
+    }
+
+    php artisan make:livewire Post\\Show
+    php artisan make:livewire Post/Show
+    php artisan make:livewire post.show
+
+jetstream:
+    composer require laravel/jetstream
+    php artisan jetstream:install livewire --dark
+    npm install
+    npm run build
+    php artisan migrate
+    php artisan vendor:publish --tag=jetstream-views
+
+

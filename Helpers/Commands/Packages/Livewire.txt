@@ -1,0 +1,5 @@
+php artisan make:livewire Dashboards\\LocaleComponent
+php artisan make:livewire Dashboards\\CurrencyComponent
+php artisan make:livewire Dashboards\\Components\\HeaderComponent
+
+php artisan make:livewire Dashboards\\Components\\FieldComponent

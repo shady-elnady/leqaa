@@ -1,0 +1,20 @@
+HMCV:  ( https://laravelmodules.com/docs/v11/installation-and-setup )
+    composer require nwidart/laravel-modules
+    php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"
+    // in composer.json
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        },
+        "merge-plugin": {
+            "include": [
+                "Modules/*/composer.json"
+            ]
+        }
+    },
+
+    composer dump-autoload
+    (https://nwidart.com/laravel-modules/v6/advanced-tools/artisan-commands)
+    // php artisan module:make Packing Payment Setting Locale Theme Auth Shipment
+    php artisan module:make Warehousing
+    //
