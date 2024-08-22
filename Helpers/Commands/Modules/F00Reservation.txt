@@ -1,0 +1,4 @@
+php artisan module:make F00Reservation
+
+Generate Models  :
+    php artisan module:make-model Reservation F00Reservation -mcsfr --fillable=event_id,student_id,status,canceled_reason,rate,comment

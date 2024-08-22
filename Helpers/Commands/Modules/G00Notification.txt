@@ -1,0 +1,4 @@
+php artisan module:make G00Notification
+
+Generate Models  :
+    php artisan module:make-model Notification G00Notification -mcsfr --fillable=device_token,title,body,data,notification_status,error_message

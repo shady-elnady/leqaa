@@ -1,0 +1,11 @@
+{
+    "name": "E00Event",
+    "alias": "e00event",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\E00Event\\Providers\\E00EventServiceProvider"
+    ],
+    "files": []
+}

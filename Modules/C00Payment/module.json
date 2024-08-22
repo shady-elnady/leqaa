@@ -1,0 +1,11 @@
+{
+    "name": "C00Payment",
+    "alias": "c00payment",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\C00Payment\\Providers\\C00PaymentServiceProvider"
+    ],
+    "files": []
+}

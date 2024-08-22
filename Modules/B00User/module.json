@@ -1,0 +1,11 @@
+{
+    "name": "B00User",
+    "alias": "b00user",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\B00User\\Providers\\B00UserServiceProvider"
+    ],
+    "files": []
+}

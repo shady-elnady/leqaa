@@ -1,0 +1,4 @@
+php artisan module:make D00Organization
+
+Generate Models  :
+    php artisan module:make-model Organization D00Organization -mcsfr --fillable=title,logo,affiliated_to,organization_type

@@ -1,0 +1,7 @@
+php artisan module:make H00Chat
+
+Generate Models  :
+    php artisan module:make-model Room H00Chat -mcsfr --fillable=title,creator_id,receiver_id,is_private
+    php artisan module:make-model Message H00Chat -mcsfr --fillable=sender_id,receiver_id,room_id,message_type,message,lat,lng,is_seen,delete_type
+    php artisan module:make-model MessageFile H00Chat -mcsfr --fillable=message_id,file_name,file_path,file_size,file_size_unit,file_extension,mime_type
+    php artisan module:make-model Faq H00Chat -mcsfr --fillable=questioner_id,respondent_id,question,answer

@@ -1,0 +1,4 @@
+php artisan make:model Locale -a
+php artisan make:model Currency -a
+php artisan make:model Setting -a
+php artisan make:model Category -a

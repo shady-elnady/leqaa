@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/a00contact",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\A00Contact\\": "app/",
+            "Modules\\A00Contact\\Database\\Factories\\": "database/factories/",
+            "Modules\\A00Contact\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\A00Contact\\Tests\\": "tests/"
+        }
+    }
+}

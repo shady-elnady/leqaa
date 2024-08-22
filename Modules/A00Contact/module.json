@@ -1,0 +1,11 @@
+{
+    "name": "A00Contact",
+    "alias": "a00contact",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\A00Contact\\Providers\\A00ContactServiceProvider"
+    ],
+    "files": []
+}

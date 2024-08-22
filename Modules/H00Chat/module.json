@@ -1,0 +1,11 @@
+{
+    "name": "H00Chat",
+    "alias": "h00chat",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\H00Chat\\Providers\\H00ChatServiceProvider"
+    ],
+    "files": []
+}

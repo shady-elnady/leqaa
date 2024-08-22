@@ -1,0 +1,11 @@
+php artisan module:make A00Contact
+
+Generate Models  :
+php artisan module:make-model Country A00Contact -mcsfr --fillable=name,continent,flag_emoji,currency_id,language,tel_code,time_zones,translations
+php artisan module:make-model Governorate A00Contact -mcsfr --fillable=name,continent,flag_emoji,currency_id,language,tel_code,time_zones,translations
+php artisan module:make-model Citiy A00Contact -mcsfr --fillable=name,continent,flag_emoji,currency_id,language,tel_code,time_zones,translations
+php artisan module:make-model State A00Contact -mcsfr --fillable=name,continent,flag_emoji,currency_id,language,tel_code,time_zones,translations
+php artisan module:make-model Locality A00Contact -mcsfr --fillable=name,continent,flag_emoji,currency_id,language,tel_code,time_zones,translations
+php artisan module:make-model Street A00Contact -mcsfr --fillable=name,continent,flag_emoji,currency_id,language,tel_code,time_zones,translations
+php artisan module:make-model Address A00Contact -mcsfr --fillable=name,continent,flag_emoji,currency_id,language,tel_code,time_zones,translations
+

@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/h00chat",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\H00Chat\\": "app/",
+            "Modules\\H00Chat\\Database\\Factories\\": "database/factories/",
+            "Modules\\H00Chat\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\H00Chat\\Tests\\": "tests/"
+        }
+    }
+}

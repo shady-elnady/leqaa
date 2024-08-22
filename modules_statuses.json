@@ -1,0 +1,10 @@
+{
+    "A00Contact": true,
+    "B00User": true,
+    "C00Payment": true,
+    "D00Organization": true,
+    "E00Event": true,
+    "F00Reservation": true,
+    "G00Notification": true,
+    "H00Chat": true
+}
