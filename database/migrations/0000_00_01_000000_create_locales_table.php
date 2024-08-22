@@ -1,10 +1,11 @@
 <?php
 
+use Core\Migrations\BaseMigration;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class extends BaseMigration
 {
     /**
      * Run the migrations.
@@ -12,11 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('locales', function (Blueprint $table) {
-            $table->id();
+            $this->defaultColumns($table);
             $table->string("locale_code");
             $table->foreignId('language_id')->constrained("locales");
             $table->string("country_code");
-            $table->timestamps();
         });
     }
 

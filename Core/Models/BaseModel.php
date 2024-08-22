@@ -59,21 +59,6 @@ class BaseModel extends Model
         return Carbon::parse($this->last_updated)->format('M d, Y h:i a');
     }
 
-    public function getFormattedEmailVerifiedAtAttribute()
-    {
-        return Carbon::parse($this->email_verified_at)->format('M d, Y h:i a');
-    }
-
-    public function getFormattedMobileVerifiedAtAttribute()
-    {
-        return Carbon::parse($this->mobile_verified_at)->format('M d, Y h:i a');
-    }
-
-    public function getFormattedLastLoginAttribute()
-    {
-        return Carbon::parse($this->last_login)->format('M d, Y h:i a');
-    }
-
     public function getFormattedStartDateTimeAttribute()
     {
         return Carbon::parse($this->start_date_time)->format('M d, Y h:i a');

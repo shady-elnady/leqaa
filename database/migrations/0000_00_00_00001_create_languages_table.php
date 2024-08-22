@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use Core\Migrations\BaseMigration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class extends BaseMigration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('languages', function (Blueprint $table) {
-            $table->id();
+            $this->defaultColumns($table);
+            $this->translationsColumn($table);
             $table->string("native_name")->unique();
             $table->string("language_iso_code")->unique();
             $table->boolean("is_bidirectional")->default(false);
-            $table->timestamps();
         });
     }
 

@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use Core\Migrations\BaseMigration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class extends BaseMigration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('currencies', function (Blueprint $table) {
-            $table->id();
-            $table->json('translations');
+            $this->defaultColumns($table);
+            $this->translationsColumn($table);
             $table->string("iso_code")->unique();
             $table->string("symbol")->nullable()->unique();
-            $table->timestamps();
         });
     }
 

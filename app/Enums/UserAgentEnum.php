@@ -4,12 +4,12 @@ namespace App\Enums;
 
 use Illuminate\Support\Collection;
 
-enum UsersTypesEnum: string
+enum UserAgentEnum: string
 {
     case Admin = 'Admin';
     case Lecturer = 'Lecturer';
     case Student = 'Student';
-
+    case User = 'User';
 
     public static function getValues(): array
     {
@@ -18,8 +18,8 @@ enum UsersTypesEnum: string
 
     public static function all(): Collection
     {
-        return collect(UsersTypesEnum::cases())->map(
-            fn(UsersTypesEnum $theme) => $theme->details()
+        return collect(UserAgentEnum::cases())->map(
+            fn(UserAgentEnum $theme) => $theme->details()
         );
     }
 
@@ -29,6 +29,7 @@ enum UsersTypesEnum: string
             self::Admin => 'Admin',
             self::Lecturer => 'Lecturer',
             self::Student => 'Student',
+            self::User => 'User',
         };
     }
 
@@ -39,15 +40,17 @@ enum UsersTypesEnum: string
                 'name'  => 'Admin',
                 'value' => 'Admin',
             ],
-
             self::Lecturer => [
                 'name'  => 'Lecturer',
                 'value' => 'Lecturer',
             ],
-
             self::Student => [
                 'name'  => 'Student',
                 'value' => 'Student',
+            ],
+            self::User => [
+                'name'  => 'User',
+                'value' => 'User',
             ],
         };
     }

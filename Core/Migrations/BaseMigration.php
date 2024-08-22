@@ -55,7 +55,7 @@ class BaseMigration extends Migration
         $table->string('email')->unique();
         $table->string('mobile')->unique();
         $table->string('password');
-        $table->boolean('is_active')->default(true);
+        $table->boolean('is_active')->default(false);
         $table->boolean('is_blocked')->default(false);
         $table->timestamp('email_verified_at')->nullable();
         $table->timestamp('mobile_verified_at')->nullable();

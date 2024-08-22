@@ -2,14 +2,14 @@
 
 namespace Modules\B00User\Models;
 
-use Core\Models\BaseModel;
+use Core\Models\BaseUserModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Modules\B00User\Database\Factories\LecturerFactory;
+// use Modules\B00User\Database\Factories\LecturerFactory;
 use Modules\E00Event\Models\Event;
 use Modules\H00Chat\Models\Faq;
 
-class Lecturer extends BaseModel
+class Lecturer extends BaseUserModel
 {
     use HasFactory;
 
@@ -19,26 +19,26 @@ class Lecturer extends BaseModel
         $this->table = "{$this->base_dir}_lecturers";
     }
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'username',
-        'email',
-        'mobile',
-        'password',
-        'avatar',
-        'is_active',
-        'is_blocked',
-        'gender',
-        'email_verified_at',
-        'mobile_verified_at',
-        'last_login',
-        'contact_info',
-        'remember_token',
-    ];
+    // /**
+    //  * The attributes that are mass assignable.
+    //  */
+    // protected $fillable = [
+    //     'first_name',
+    //     'last_name',
+    //     'username',
+    //     'email',
+    //     'mobile',
+    //     'password',
+    //     'avatar',
+    //     'is_active',
+    //     'is_blocked',
+    //     'gender',
+    //     'email_verified_at',
+    //     'mobile_verified_at',
+    //     'last_login',
+    //     'contact_info',
+    //     'remember_token',
+    // ];
 
     public function events(): HasMany
     {
@@ -50,8 +50,8 @@ class Lecturer extends BaseModel
         return $this->hasMany(Faq::class);
     }
 
-    protected static function newFactory(): LecturerFactory
-    {
-        //return LecturerFactory::new();
-    }
+    // protected static function newFactory(): LecturerFactory
+    // {
+    //     //return LecturerFactory::new();
+    // }
 }
