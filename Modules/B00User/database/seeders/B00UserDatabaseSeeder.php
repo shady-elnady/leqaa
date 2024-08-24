@@ -15,6 +15,7 @@ class B00UserDatabaseSeeder extends Seeder
             AdminSeeder::class,
             LecturerSeeder::class,
             StudentSeeder::class,
+            InterestSeeder::class,
         ]);
     }
 }

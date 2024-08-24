@@ -17,10 +17,9 @@ class AdminSeeder extends Seeder
         $timeNow = now();
         Admin::create(
             [
-                'name' => 'Shady El Nady',
-                'first_name' => 'Shady',
-                'last_name' => 'El Nady',
-                'email' => 'shady@admin.test',
+                'name' => 'Admin 1 Name',
+                'complete_name' => 'Admin 1 Complete Name',
+                'email' => 'admin1@test.com',
                 'mobile' => '01061656112',
                 'is_active' => true,
                 'is_blocked' => false,
@@ -35,6 +34,9 @@ class AdminSeeder extends Seeder
                     'lat' => 4.33333,
                     'lng' => 4.33333,
                 ],
+                'birth_date' => now(),
+                'university_number' => '1111111111',
+                'is_graduate' => true,
             ]
         );
         // Admin::factory()->count(4)->create();

@@ -19,11 +19,10 @@ class LecturerSeeder extends Seeder
         Lecturer::create(
             [
                 'title' => TitlesEnum::Doctor->value,
-                'name' => 'Shady El Nady',
-                'first_name' => 'Shady',
-                'last_name' => 'El Nady',
-                'email' => 'shady@lecturer.test',
-                'mobile' => '01061656112',
+                'name' => 'Lecturer 1 Name',
+                'complete_name' => 'Lecturer 1 Complete Name',
+                'email' => 'lecturer1@test.com',
+                'mobile' => '01011111111',
                 'is_active' => true,
                 'is_blocked' => false,
                 'email_verified_at' => $timeNow,
@@ -37,6 +36,9 @@ class LecturerSeeder extends Seeder
                     'lat' => 4.33333,
                     'lng' => 4.33333,
                 ],
+                'birth_date' => now(),
+                'university_number' => '1111111111',
+                'is_graduate' => true,
             ]
         );
         // Lecturer::factory()->count(4)->create();

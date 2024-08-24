@@ -51,8 +51,7 @@ class BaseMigration extends Migration
         $table->enum('title', TitlesEnum::getValues())->nullable();
         $table->string('name')->nullable()->unique();
         $table->string('avatar')->nullable();
-        $table->string('first_name')->nullable();
-        $table->string('last_name')->nullable();
+        $table->string('complete_name')->nullable();
         $table->enum('gender', GendersEnum::getValues())->nullable();
         $table->string('email')->unique();
         $table->string('mobile')->unique();
@@ -64,6 +63,9 @@ class BaseMigration extends Migration
         $table->timestamp('last_login')->nullable();
         $table->json('contact_info')->nullable();
         $table->rememberToken();
+        $table->date('birth_date')->nullable();
+        $table->string('university_number')->nullable();
+        $table->boolean('is_graduate')->default(false);
     }
 
     /**

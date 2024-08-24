@@ -16,28 +16,73 @@ class CategorySeeder extends Seeder
             [
                 'image' => '',
                 'translations' => [
-                    'ar_AS' => 'مناسبات',
-                    'ar_EG' => 'مناسبات',
-                    'en_US' => 'Events',
-                    'fr_FR' => '',
+                    'ar_AS' => 'الطب',
+                    'ar_EG' => 'الطب',
+                    'en_US' => 'Medicine',
+                    'fr_FR' => 'Médecine',
                 ]
             ],
             [
                 'image' => '',
                 'translations' => [
-                    'ar_AS' => 'كورسات',
-                    'ar_EG' => 'كورسات',
-                    'en_US' => 'Courses',
-                    'fr_FR' => '',
+                    'ar_AS' => 'العلوم',
+                    'ar_EG' => 'العلوم',
+                    'en_US' => 'Science',
+                    'fr_FR' => 'les Sciences',
                 ]
             ],
             [
                 'image' => '',
                 'translations' => [
-                    'ar_AS' => 'تدريب',
-                    'ar_EG' => 'تدريب',
-                    'en_US' => 'Traning',
-                    'fr_FR' => '',
+                    'ar_AS' => 'الهندسه',
+                    'ar_EG' => 'الهندسه',
+                    'en_US' => 'Engineering',
+                    'fr_FR' => 'Ingénierie',
+                ]
+            ],
+            [
+                'image' => '',
+                'translations' => [
+                    'ar_AS' => 'الثقافه والفنون',
+                    'ar_EG' => 'الثقافه والفنون',
+                    'en_US' => 'Culture & Arts',
+                    'fr_FR' => 'Culture et Arts',
+                ]
+            ],
+            [
+                'image' => '',
+                'translations' => [
+                    'ar_AS' => 'التكنولوجيا',
+                    'ar_EG' => 'التكنولوجيا',
+                    'en_US' => 'Technology',
+                    'fr_FR' => 'Technologie',
+                ]
+            ],
+            [
+                'image' => '',
+                'translations' => [
+                    'ar_AS' => 'الزراعه',
+                    'ar_EG' => 'الزراعه',
+                    'en_US' => 'Agriculture',
+                    'fr_FR' => 'Agriculture',
+                ]
+            ],
+            [
+                'image' => '',
+                'translations' => [
+                    'ar_AS' => 'الرياضه',
+                    'ar_EG' => 'الرياضه',
+                    'en_US' => 'Sports',
+                    'fr_FR' => 'Sportif',
+                ]
+            ],
+            [
+                'image' => '',
+                'translations' => [
+                    'ar_AS' => 'القانون',
+                    'ar_EG' => 'القانون',
+                    'en_US' => 'Law',
+                    'fr_FR' => 'la Loi',
                 ]
             ],
         ];

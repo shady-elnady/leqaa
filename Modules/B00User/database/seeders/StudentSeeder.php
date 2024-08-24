@@ -19,11 +19,10 @@ class StudentSeeder extends Seeder
         Student::create(
             [
                 'title' => TitlesEnum::Student->value,
-                'name' => 'Shady El Nady',
-                'first_name' => 'Shady',
-                'last_name' => 'El Nady',
-                'email' => 'shady@student.test',
-                'mobile' => '01061656112',
+                'name' => 'Student 1 Name',
+                'complete_name' => 'Student 1 Complete Name',
+                'email' => 'student1@test.com',
+                'mobile' => '01011111111',
                 'is_active' => true,
                 'is_blocked' => false,
                 'email_verified_at' => $timeNow,
@@ -39,6 +38,9 @@ class StudentSeeder extends Seeder
                 ],
                 'university_id' => 1,
                 'college_id' => 1,
+                'birth_date' => now(),
+                'university_number' => '1111111111',
+                'is_graduate' => false,
             ]
         );
         // Student::factory()->count(4)->create();

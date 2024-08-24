@@ -2,9 +2,11 @@
 
 namespace Modules\B00User\Models;
 
+use App\Models\Category;
 use Core\Models\BaseUserModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Modules\B00User\Database\Factories\StudentFactory;
 use Modules\F00Reservation\Models\Reservation;
 use Modules\H00Chat\Models\Faq;
@@ -25,8 +27,7 @@ class Student extends BaseUserModel
     protected $fillable = [
         'name',
         'avatar',
-        'first_name',
-        'last_name',
+        'complete_name',
         'email',
         'mobile',
         'password',
@@ -40,6 +41,9 @@ class Student extends BaseUserModel
         'remember_token',
         'university_id',
         'college_id',
+        'birth_date',
+        'university_number',
+        'is_graduate',
     ];
 
 
@@ -51,6 +55,11 @@ class Student extends BaseUserModel
     public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    public function interests(): HasManyThrough
+    {
+        return $this->hasManyThrough(Category::class, Interest::class);
     }
 
     protected static function newFactory(): StudentFactory
