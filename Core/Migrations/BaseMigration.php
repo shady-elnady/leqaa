@@ -8,6 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use App\Enums\GendersEnum;
 use App\Enums\FilesTypesEnum;
 use App\Enums\FilesSizeUnitsEnum;
+use App\Enums\TitlesEnum;
 
 class BaseMigration extends Migration
 {
@@ -47,10 +48,11 @@ class BaseMigration extends Migration
 
     protected function usersColumns(Blueprint $table): void
     {
+        $table->enum('title', TitlesEnum::getValues())->nullable();
+        $table->string('name')->nullable()->unique();
         $table->string('avatar')->nullable();
         $table->string('first_name')->nullable();
         $table->string('last_name')->nullable();
-        $table->string('username')->nullable()->unique();
         $table->enum('gender', GendersEnum::getValues())->nullable();
         $table->string('email')->unique();
         $table->string('mobile')->unique();
@@ -81,7 +83,7 @@ class BaseMigration extends Migration
     {
         $table->id();
         $table->uuid()->unique();
-        $table->timestamps();
+        $this->timestampsColumns($table);
     }
 
     protected function fileColumns(Blueprint $table): void

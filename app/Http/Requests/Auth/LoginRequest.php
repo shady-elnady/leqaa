@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests\Auth;
 
+use Illuminate\Support\Str;
+use App\Enums\UserTypesEnum;
 use Illuminate\Auth\Events\Lockout;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Str;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
@@ -27,8 +28,17 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'account_type' => ['required', 'in:' . implode(',', UserTypesEnum::getValues())],
+            'mobile' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:4', 'max:255'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'mobile' => __('auth.mobile')
         ];
     }
 
@@ -41,7 +51,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (! Auth::attempt($this->only('email', 'password', 'mobile'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -80,6 +90,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
     }
 }

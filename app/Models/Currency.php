@@ -16,8 +16,8 @@ class Currency extends BaseModel
     }
 
     protected $fillable = [
-        'translations',
         'iso_code',
         'symbol',
+        'translations',
     ];
 }

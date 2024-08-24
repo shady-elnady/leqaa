@@ -39,8 +39,8 @@ class Faq extends BaseModel
         return $this->belongsTo(Lecturer::class, 'respondent_id');
     }
 
-    protected static function newFactory(): FaqFactory
-    {
-        //return FaqFactory::new();
-    }
+    // protected static function newFactory(): FaqFactory
+    // {
+    //     //return FaqFactory::new();
+    // }
 }

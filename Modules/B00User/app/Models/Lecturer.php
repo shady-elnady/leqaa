@@ -3,15 +3,15 @@
 namespace Modules\B00User\Models;
 
 use Core\Models\BaseUserModel;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-// use Modules\B00User\Database\Factories\LecturerFactory;
+use Modules\B00User\Database\Factories\LecturerFactory;
 use Modules\E00Event\Models\Event;
 use Modules\H00Chat\Models\Faq;
 
 class Lecturer extends BaseUserModel
 {
-    use HasFactory;
+    // use HasFactory;
 
     public function __construct(array $attributes = [])
     {
@@ -50,8 +50,8 @@ class Lecturer extends BaseUserModel
         return $this->hasMany(Faq::class);
     }
 
-    // protected static function newFactory(): LecturerFactory
-    // {
-    //     //return LecturerFactory::new();
-    // }
+    protected static function newFactory(): LecturerFactory
+    {
+        return LecturerFactory::new();
+    }
 }

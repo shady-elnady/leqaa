@@ -11,6 +11,10 @@ class E00EventDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        $this->call([
+            EventTypeSeeder::class,
+            EventSeeder::class,
+            EventPhotoSeeder::class,
+        ]);
     }
 }

@@ -27,7 +27,7 @@ return new class extends BaseMigration
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
-            $table->enum('user_agent', UserAgentEnum::getValues())->nullable();
+            $table->string('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });

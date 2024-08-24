@@ -3,12 +3,11 @@
 namespace Modules\A00Contact\Models;
 
 use App\Models\Currency;
-use App\Models\Language;
+use App\Models\Language as LanguageModel;
 use Core\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Http;
-use Modules\A00Contact\Database\Factories\CountryFactory;
 use Modules\A00Contact\Enums\ContinentsEnum;
 
 class Country extends BaseModel
@@ -37,6 +36,7 @@ class Country extends BaseModel
 
     protected $casts = [
         'continent' => ContinentsEnum::class,
+        'translations' => 'array',
     ];
 
     // https://laraveldaily.com/lesson/laravel-user-timezones/user-timezone-in-registration
@@ -56,7 +56,7 @@ class Country extends BaseModel
 
     public function language(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Language::class, 'language_id');
+        return $this->belongsTo(LanguageModel::class, 'language_id');
     }
 
 
@@ -65,8 +65,8 @@ class Country extends BaseModel
         return $this->hasMany(Governorate::class);
     }
 
-    protected static function newFactory(): CountryFactory
-    {
-        //return CountryFactory::new();
-    }
+    // protected static function newFactory(): CountryFactory
+    // {
+    //     //return CountryFactory::new();
+    // }
 }

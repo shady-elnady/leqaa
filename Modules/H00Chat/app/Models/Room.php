@@ -49,13 +49,13 @@ class Room extends BaseModel
         return $query->where('is_private', 0);
     }
 
-    protected static function newFactory(): RoomFactory
-    {
-        //return RoomFactory::new();
-    }
-
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class);
     }
+
+    // protected static function newFactory(): RoomFactory
+    // {
+    //     //return RoomFactory::new();
+    // }
 }

@@ -38,8 +38,8 @@ class Governorate extends BaseModel
     }
 
 
-    protected static function newFactory(): GovernorateFactory
-    {
-        //return GovernorateFactory::new();
-    }
+    // protected static function newFactory(): GovernorateFactory
+    // {
+    //     //return GovernorateFactory::new();
+    // }
 }

@@ -25,6 +25,7 @@ class PaymentStatus extends BaseModel
 
     protected $casts = [
         'payment_status' => PaymentStatusEnum::class,
+        'translations' => 'array',
     ];
 
     public function __construct(array $attributes = [])

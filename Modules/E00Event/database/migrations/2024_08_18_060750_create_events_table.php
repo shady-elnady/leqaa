@@ -20,16 +20,24 @@ return new class extends BaseEventMigration
             $table->string('title');
             $table->string('hall');
             $table->enum('event_paid_status', EventPaidStatusEnum::getValues());
-            $table->foreignId('organizer_id')->nullable()->constrained("{$this->organization_module_dir}_organizations");
+            //
+            $table->foreignId('university_id')->constrained("{$this->organization_module_dir}_universities");
+            //
+            $table->foreignId('college_id')->nullable()->constrained("{$this->organization_module_dir}_colleges")->nullOnDelete();
+            //
+            $table->foreignId('organizer_id')->nullable()->constrained("{$this->organization_module_dir}_organizations")->nullOnDelete();
+            //
             $table->text('description');
-
+            //
             $table->unsignedBigInteger('lecturer_id')->nullable();
             $table->foreign('lecturer_id')->references('id')->on("{$this->user_module_dir}_lecturers");
-
+            //
             $table->double('lecturer_Financial_dues')->nullable();
             $table->enum('lecturer_financial_system', LecturerFinancialSystemEnum::getValues());
             $table->foreignId('event_type_id')->constrained("{$this->base_dir}_event_types");
+            //
             $table->foreignId('category_id')->constrained('categories');
+            //
             $table->enum('event_status', EventStatusEnum::getValues());
             $table->timestamp('start_date_time')->nullable();
         });

@@ -3,7 +3,6 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\D00Organization\Models\Base\BaseOrganizationMigration;
-use Modules\D00Organization\Enums\OrganizationTypesEnum;
 
 return new class extends BaseOrganizationMigration
 {
@@ -14,10 +13,11 @@ return new class extends BaseOrganizationMigration
     {
         Schema::create("{$this->base_dir}_organizations", function (Blueprint $table) {
             $this->defaultColumns($table);
-            $table->string('name')->unique();
             $table->string('logo')->nullable();
-            $table->enum('organization_type', OrganizationTypesEnum::getValues());
+            $table->foreignId('organization_type_id')->nullable()->constrained("{$this->base_dir}_organizations_types")->nullOnDelete();
+            $table->foreignId('university_id')->nullable()->constrained("{$this->base_dir}_universities")->nullOnDelete();
             $table->foreignId('affiliated_to')->nullable()->constrained("{$this->base_dir}_organizations")->nullOnDelete();
+            $this->translationsColumn($table);
         });
     }
 

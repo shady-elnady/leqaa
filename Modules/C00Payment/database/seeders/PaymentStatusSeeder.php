@@ -3,6 +3,7 @@
 namespace Modules\C00Payment\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\C00Payment\Enums\PaymentStatusEnum;
 use Modules\C00Payment\Models\PaymentStatus;
 
 class PaymentStatusSeeder extends Seeder
@@ -12,65 +13,42 @@ class PaymentStatusSeeder extends Seeder
      */
     public function run(): void
     {
-
-        $paymentStatuses = [
+        $paymentMethods = [
             [
-                'payment_status' => 'Paid',
+                'payment_status' => PaymentStatusEnum::Paid->value,
                 'translations' => [
-                    [
-                        'locale_id' => 1,
-                        'title' => 'مدفوع بالكامل',
-                    ],
-                    [
-                        'locale_id' => 2,
-                        'title' => 'Completely Paid',
-                    ],
-                ],
+                    'ar_AS' => 'مدفوع بالكامل',
+                    'ar_EG' => 'مدفوع بالكامل',
+                    'en_US' => 'Completely Paid',
+                    'fr_FR' => 'Entièrement Payé',
+                ]
             ],
             [
-                'payment_status' => 'Pay later',
+                'payment_status' => PaymentStatusEnum::PayLater->value,
                 'translations' => [
-                    [
-                        'locale_id' => 1,
-                        'title' => 'مدفوع لاحقا',
-                    ],
-                    [
-                        'locale_id' => 2,
-                        'title' => 'Pay later',
-                    ],
-                ],
+                    'ar_AS' => 'مدفوع لاحقا',
+                    'ar_EG' => 'مدفوع لاحقا',
+                    'en_US' => 'Pay later',
+                    'fr_FR' => 'Payer Plus Tard',
+                ]
             ],
             [
-                'payment_status' => 'Partially paid',
+                'payment_status' => PaymentStatusEnum::PartiallyPaid->value,
                 'translations' => [
-                    [
-                        'locale_id' => 1,
-                        'title' => 'مدفوع جزئ',
-                    ],
-                    [
-                        'locale_id' => 2,
-                        'title' => 'Partial Paid',
-                    ],
-                ],
+                    'ar_AS' => 'مدفوع جزئ',
+                    'ar_EG' => 'مدفوع جزئ',
+                    'en_US' => 'Partial Paid',
+                    'fr_FR' => 'Partiellement Payé',
+                ]
             ],
         ];
-        foreach ([1, 2, 3] as $branchId) {
-            foreach ($paymentStatuses as $paymentStatus) {
-                $paymentStatusRecord = PaymentStatus::create([
-                    'branch_id' => $branchId,
-                    'payment_status' => $paymentStatus['payment_status'],
-                ]);
-                //
-                foreach ($paymentStatus['translations'] as $translation) {
-                    EntityTranslation::updateOrCreate([
-                        "entity_type"  => PaymentStatus::class,
-                        "entity_id"  => $paymentStatusRecord->id,
-                        "locale_id"  => $translation['locale_id'],
-                        "field"  => 'name',
-                        "title"  => $translation['title'],
-                    ]);
-                }
-            }
+        foreach ($paymentMethods as $paymentMethod) {
+            PaymentStatus::updateOrCreate(
+                [
+                    'payment_status' => $paymentMethod['payment_status'],
+                    'translations' => $paymentMethod['translations']
+                ]
+            );
         }
     }
 }

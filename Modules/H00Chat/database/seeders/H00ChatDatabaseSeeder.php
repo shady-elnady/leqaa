@@ -11,6 +11,11 @@ class H00ChatDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        $this->call([
+            RoomSeeder::class,
+            MessageSeeder::class,
+            MessageFileSeeder::class,
+            FaqSeeder::class,
+        ]);
     }
 }

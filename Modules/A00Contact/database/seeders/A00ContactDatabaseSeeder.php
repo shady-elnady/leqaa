@@ -11,6 +11,14 @@ class A00ContactDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        $this->call([
+            CountrySeeder::class,
+            GovernorateSeeder::class,
+            CitySeeder::class,
+            LocalitySeeder::class,
+            StateSeeder::class,
+            StreetSeeder::class,
+            AddressSeeder::class,
+        ]);
     }
 }

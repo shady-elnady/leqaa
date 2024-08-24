@@ -11,6 +11,10 @@ class B00UserDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        $this->call([
+            AdminSeeder::class,
+            LecturerSeeder::class,
+            StudentSeeder::class,
+        ]);
     }
 }

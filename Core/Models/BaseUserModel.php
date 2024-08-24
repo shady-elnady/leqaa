@@ -15,14 +15,16 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class BaseUserModel extends Model implements
     AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use HasFactory, HasUuid, HasTrans, Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
+    use HasFactory, HasUuid, HasTrans, Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail, Notifiable, HasApiTokens;
     use ModuleTrait;
 
     protected string $base_dir;
@@ -38,13 +40,13 @@ class BaseUserModel extends Model implements
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
+        'avatar',
         'first_name',
         'last_name',
-        'username',
         'email',
         'mobile',
         'password',
-        'avatar',
         'is_active',
         'is_blocked',
         'gender',
@@ -74,9 +76,18 @@ class BaseUserModel extends Model implements
     {
         return [
             'email_verified_at' => 'datetime',
+            'mobile_verified_at' => 'datetime',
+            'last_login' => 'datetime',
             'password' => 'hashed',
+            'contact_info' => 'array'
         ];
     }
+
+    public function setPasswordAttribute($value): void
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
 
     /**
      * Date functions
@@ -86,9 +97,9 @@ class BaseUserModel extends Model implements
         return Carbon::parse($this->created_at)->format('M d, Y h:i a');
     }
 
-    public function getFormattedLastUpdatedAttribute()
+    public function getFormattedUpdatedAtAttribute()
     {
-        return Carbon::parse($this->last_updated)->format('M d, Y h:i a');
+        return Carbon::parse($this->updated_at)->format('M d, Y h:i a');
     }
 
     public function getFormattedEmailVerifiedAtAttribute()

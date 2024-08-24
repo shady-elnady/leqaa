@@ -70,8 +70,8 @@ class Transaction extends BaseModel
     //     return $this->hasMany(Transaction::class);
     // }
 
-    protected static function newFactory(): TransactionFactory
-    {
-        //return TransactionFactory::new();
-    }
+    // protected static function newFactory(): TransactionFactory
+    // {
+    //     //return TransactionFactory::new();
+    // }
 }

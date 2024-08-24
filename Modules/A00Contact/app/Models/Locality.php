@@ -38,8 +38,8 @@ class Locality extends BaseModel
     }
 
 
-    protected static function newFactory(): LocalityFactory
-    {
-        //return LocalityFactory::new();
-    }
+    // protected static function newFactory(): LocalityFactory
+    // {
+    //     //return LocalityFactory::new();
+    // }
 }

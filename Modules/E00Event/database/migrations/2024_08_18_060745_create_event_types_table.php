@@ -14,6 +14,7 @@ return new class extends BaseEventMigration
         Schema::create("{$this->base_dir}_event_types", function (Blueprint $table) {
             $this->defaultColumns($table);
             $this->translationsColumn($table);
+            $this->imageColumn($table);
         });
     }
 

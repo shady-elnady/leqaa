@@ -2,8 +2,8 @@
 
 namespace Modules\C00Payment\Database\Seeders;
 
-use App\Models\EntityTranslation;
 use Illuminate\Database\Seeder;
+use Modules\C00Payment\Enums\PaymentMethodsEnum;
 use Modules\C00Payment\Models\PaymentMethod;
 
 class PaymentMethodSeeder extends Seeder
@@ -13,90 +13,62 @@ class PaymentMethodSeeder extends Seeder
      */
     public function run(): void
     {
+
         $paymentMethods = [
             [
-                'payment_method' => 'Monetary',
+                'payment_method' => PaymentMethodsEnum::Monetary->value,
                 'translations' => [
-                    [
-                        'locale_id' => 1,
-                        'title' => 'نقدى',
-                    ],
-                    [
-                        'locale_id' => 2,
-                        'title' => 'Cash',
-                    ],
-                ],
+                    'ar_AS' => 'نقدى',
+                    'ar_EG' => 'نقدى',
+                    'en_US' => 'Monetary',
+                    'fr_FR' => 'Monétaire',
+                ]
             ],
             [
-                'payment_method' => 'Credit Card',
+                'payment_method' => PaymentMethodsEnum::CreditCard->value,
                 'translations' => [
-                    [
-                        'locale_id' => 1,
-                        'title' => 'بطاقه الائتمان',
-                    ],
-                    [
-                        'locale_id' => 2,
-                        'title' => 'Credit Card',
-                    ],
-                ],
+                    'ar_AS' => 'بطاقه الائتمان',
+                    'ar_EG' => 'بطاقه الائتمان',
+                    'en_US' => 'Credit Card',
+                    'fr_FR' => 'Carte de Crédit',
+                ]
             ],
             [
-                'payment_method' => 'Bank Transfer',
+                'payment_method' => PaymentMethodsEnum::BankTransfer->value,
                 'translations' => [
-                    [
-                        'locale_id' => 1,
-                        'title' => 'تحويل مصرفى',
-                    ],
-                    [
-                        'locale_id' => 2,
-                        'title' => 'Bank Transfer',
-                    ],
-                ],
+                    'ar_AS' => 'تحويل مصرفى',
+                    'ar_EG' => 'تحويل مصرفى',
+                    'en_US' => 'Bank Transfer',
+                    'fr_FR' => 'Virement Bancaire',
+                ]
             ],
             [
-                'payment_method' => 'Check',
+                'payment_method' => PaymentMethodsEnum::Check->value,
                 'translations' => [
-                    [
-                        'locale_id' => 1,
-                        'title' => 'شيك',
-                    ],
-                    [
-                        'locale_id' => 2,
-                        'title' => 'Check',
-                    ],
-                ],
+                    'ar_AS' => 'شيك',
+                    'ar_EG' => 'شيك',
+                    'en_US' => 'Check',
+                    'fr_FR' => 'Vérifier',
+                ]
             ],
             [
-                'payment_method' => 'Money Transfer',
+                'payment_method' => PaymentMethodsEnum::MoneyTransfer->value,
                 'translations' => [
-                    [
-                        'locale_id' => 1,
-                        'title' => 'نقل اموال',
-                    ],
-                    [
-                        'locale_id' => 2,
-                        'title' => 'Money Transfer',
-                    ],
-                ],
+                    'ar_AS' => 'نقل اموال',
+                    'ar_EG' => 'نقل اموال',
+                    'en_US' => 'Money Transfer',
+                    'fr_FR' => "Transfert d'Argent",
+                ]
             ],
+
         ];
-        foreach ([1, 2, 3] as $branchId) {
-            foreach ($paymentMethods as $paymentMethod) {
-                $paymentMethodRecord = PaymentMethod::create([
-                    'branch_id' => $branchId,
+        foreach ($paymentMethods as $paymentMethod) {
+            PaymentMethod::updateOrCreate(
+                [
                     'payment_method' => $paymentMethod['payment_method'],
-                ]);
-                //
-                foreach ($paymentMethod['translations'] as $translation) {
-                    EntityTranslation::updateOrCreate([
-                        "entity_type"  => 'Modules\S05Transaction\Models\PaymentMethod',
-                        "entity_id"  => $paymentMethodRecord->id,
-                        "locale_id"  => $translation['locale_id'],
-                        "field"  => 'name',
-                        "title"  => $translation['title'],
-                    ]);
-                }
-            }
+                    'translations' => $paymentMethod['translations']
+                ]
+            );
         }
     }
 }

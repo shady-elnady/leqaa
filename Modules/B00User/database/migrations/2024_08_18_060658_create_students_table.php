@@ -14,6 +14,10 @@ return new class extends BaseUserMigration
         Schema::create("{$this->base_dir}_students", function (Blueprint $table) {
             $this->defaultColumns($table);
             $this->usersColumns($table);
+            //
+            $table->foreignId('university_id')->nullable()->constrained("{$this->organization_module_dir}_universities")->nullOnDelete();
+            //
+            $table->foreignId('college_id')->nullable()->constrained("{$this->organization_module_dir}_colleges")->nullOnDelete();
         });
     }
 

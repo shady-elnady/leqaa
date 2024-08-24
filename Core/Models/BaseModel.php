@@ -22,29 +22,33 @@ class BaseModel extends Model
         $this->base_dir = strtolower($this->getModuleName());
     }
 
-    public static function booted()
-    {
-        static::addGlobalScope('translations', function (Builder $builder) {
-            if (
-                in_array(
-                    'translations',
-                    array_merge(
-                        $builder->getModel()->getFillable(),
-                    )
-                )
-            ) {
-                $builder->getModel()->translations[app()->getLocale()];
-            }
-            // if (method_exists($builder->getModel(), 'translations')) {
-            //     // $builder->with(['translations' => function ($query) {
-            //     //     return $query->whereHas('locale', function ($q) {
-            //     //         // dd(app()->getLocale());
-            //     //         $q->where('language_code', app()->getLocale());
-            //     //     });
-            //     // }]);
-            // }
-        });
-    }
+    // public static function booted()
+    // {
+    //     static::addGlobalScope('translations', function (Builder $builder) {
+    //         if (
+    //             in_array(
+    //                 'translations',
+    //                 array_merge(
+    //                     $builder->getModel()->getFillable(),
+    //                 )
+    //             )
+    //         ) {
+    //             $builder->getModel()->translations[app()->getLocale()];
+    //         }
+    //         if (method_exists($builder->getModel(), 'translations')) {
+    //             // $builder->with(['translations' => function ($query) {
+    //             //     return $query->whereHas('locale', function ($q) {
+    //             //         // dd(app()->getLocale());
+    //             //         $q->where('language_code', app()->getLocale());
+    //             //     });
+    //             // }]);
+    //         }
+    //     });
+    // }
+
+    protected $casts = [
+        'translations' => 'array'
+    ];
 
     /**
      * Date functions
@@ -54,9 +58,9 @@ class BaseModel extends Model
         return Carbon::parse($this->created_at)->format('M d, Y h:i a');
     }
 
-    public function getFormattedLastUpdatedAttribute()
+    public function getFormattedUpdatedAtAttribute()
     {
-        return Carbon::parse($this->last_updated)->format('M d, Y h:i a');
+        return Carbon::parse($this->updated_at)->format('M d, Y h:i a');
     }
 
     public function getFormattedStartDateTimeAttribute()

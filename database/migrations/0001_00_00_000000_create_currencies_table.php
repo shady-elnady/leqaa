@@ -15,7 +15,7 @@ return new class extends BaseMigration
             $this->defaultColumns($table);
             $this->translationsColumn($table);
             $table->string("iso_code")->unique();
-            $table->string("symbol")->nullable()->unique();
+            $table->string("symbol")->nullable();
         });
     }
 

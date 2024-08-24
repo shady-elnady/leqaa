@@ -31,8 +31,8 @@ class EventPhoto extends BaseModel
         return $this->belongsTo(Event::class, 'event_id');
     }
 
-    protected static function newFactory(): EventPhotoFactory
-    {
-        //return EventPhotoFactory::new();
-    }
+    // protected static function newFactory(): EventPhotoFactory
+    // {
+    //     //return EventPhotoFactory::new();
+    // }
 }

@@ -31,6 +31,7 @@ class State extends BaseModel
 
     protected $casts = [
         'state_type' => StateTypesEnum::class,
+        'translations' => 'array',
     ];
 
     public function city(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -43,8 +44,8 @@ class State extends BaseModel
         return $this->hasMany(Locality::class);
     }
 
-    protected static function newFactory(): StateFactory
-    {
-        //return StateFactory::new();
-    }
+    // protected static function newFactory(): StateFactory
+    // {
+    //     //return StateFactory::new();
+    // }
 }

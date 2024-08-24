@@ -11,6 +11,11 @@ class D00OrganizationDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        $this->call([
+            OrganizationTypeSeeder::class,
+            UniversitySeeder::class,
+            CollegeSeeder::class,
+            OrganizationSeeder::class,
+        ]);
     }
 }

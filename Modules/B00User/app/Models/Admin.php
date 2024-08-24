@@ -3,12 +3,12 @@
 namespace Modules\B00User\Models;
 
 use Core\Models\BaseUserModel;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\B00User\Database\Factories\AdminFactory;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\B00User\Database\Factories\AdminFactory;
 
 class Admin extends BaseUserModel
 {
-    use HasFactory;
+    // use HasFactory;
 
     public function __construct(array $attributes = [])
     {
@@ -38,8 +38,8 @@ class Admin extends BaseUserModel
     // ];
 
 
-    // protected static function newFactory(): AdminFactory
-    // {
-    //     //return AdminFactory::new();
-    // }
+    protected static function newFactory(): AdminFactory
+    {
+        return AdminFactory::new();
+    }
 }

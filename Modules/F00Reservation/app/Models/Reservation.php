@@ -47,8 +47,8 @@ class Reservation extends BaseModel
         return $this->belongsTo(Student::class, 'student_id');
     }
 
-    protected static function newFactory(): ReservationFactory
-    {
-        //return ReservationFactory::new();
-    }
+    // protected static function newFactory(): ReservationFactory
+    // {
+    //     //return ReservationFactory::new();
+    // }
 }

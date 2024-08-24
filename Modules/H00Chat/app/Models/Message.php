@@ -63,8 +63,8 @@ class Message extends BaseModel
         return $this->hasMany(MessageFile::class);
     }
 
-    protected static function newFactory(): MessageFactory
-    {
-        //return MessageFactory::new();
-    }
+    // protected static function newFactory(): MessageFactory
+    // {
+    //     //return MessageFactory::new();
+    // }
 }

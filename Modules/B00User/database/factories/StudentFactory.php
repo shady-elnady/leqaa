@@ -2,7 +2,9 @@
 
 namespace Modules\B00User\Database\Factories;
 
+use App\Enums\GendersEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class StudentFactory extends Factory
 {
@@ -16,6 +18,27 @@ class StudentFactory extends Factory
      */
     public function definition(): array
     {
-        return [];
+        return [
+            'name' => fake()->name(),
+            'first_name' => fake()->name(),
+            'last_name' => fake()->name(),
+            'email' => fake()->safeEmail(),
+            'mobile' => fake()->phoneNumber(),
+            'is_active' => true,
+            'is_blocked' => false,
+            'email_verified_at' => now(),
+            'mobile_verified_at' => now(),
+            'last_login' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+            'avatar' => fake()->image(),
+            'gender' => GendersEnum::Male->value,
+            'contact_info' => [
+                'lat' => 4.33333,
+                'lng' => 4.33333,
+            ],
+            'university_id' => 1,
+            'college_id' => 1,
+        ];
     }
 }

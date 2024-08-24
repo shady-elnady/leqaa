@@ -6,8 +6,7 @@ use Core\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Modules\D00Organization\Database\Factories\OrganizationFactory;
-use Modules\D00Organization\Enums\OrganizationTypesEnum;
+// use Modules\D00Organization\Database\Factories\OrganizationFactory;
 use Modules\E00Event\Models\Event;
 
 class Organization extends BaseModel
@@ -24,14 +23,11 @@ class Organization extends BaseModel
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'name',
         'logo',
+        'organization_type_id',
+        'university_id',
         'affiliated_to',
-        'organization_type',
-    ];
-
-    protected $casts = [
-        'organization_type' => OrganizationTypesEnum::class,
+        'translations',
     ];
 
     public function affiliatedTo(): BelongsTo // منتمي إلى
@@ -44,8 +40,8 @@ class Organization extends BaseModel
         return $this->hasMany(Event::class);
     }
 
-    protected static function newFactory(): OrganizationFactory
-    {
-        //return OrganizationFactory::new();
-    }
+    // protected static function newFactory(): OrganizationFactory
+    // {
+    //     //return OrganizationFactory::new();
+    // }
 }

@@ -11,6 +11,8 @@ class F00ReservationDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        $this->call([
+            ReservationSeeder::class,
+        ]);
     }
 }

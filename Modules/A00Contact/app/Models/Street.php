@@ -36,8 +36,8 @@ class Street extends BaseModel
         return $this->hasMany(Address::class);
     }
 
-    protected static function newFactory(): StreetFactory
-    {
-        //return StreetFactory::new();
-    }
+    // protected static function newFactory(): StreetFactory
+    // {
+    //     //return StreetFactory::new();
+    // }
 }

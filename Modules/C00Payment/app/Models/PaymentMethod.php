@@ -20,6 +20,7 @@ class PaymentMethod extends BaseModel
 
     protected $casts = [
         'payment_method' => PaymentMethodsEnum::class,
+        'translations' => 'array',
     ];
 
     public function __construct(array $attributes = [])

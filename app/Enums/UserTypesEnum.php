@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use Illuminate\Support\Collection;
 
-enum UserAgentEnum: string
+enum UserTypesEnum: string
 {
     case Admin = 'Admin';
     case Lecturer = 'Lecturer';
@@ -18,8 +18,8 @@ enum UserAgentEnum: string
 
     public static function all(): Collection
     {
-        return collect(UserAgentEnum::cases())->map(
-            fn(UserAgentEnum $theme) => $theme->details()
+        return collect(UserTypesEnum::cases())->map(
+            fn(UserTypesEnum $theme) => $theme->details()
         );
     }
 

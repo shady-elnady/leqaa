@@ -34,9 +34,8 @@ class Notification extends BaseModel
         'notification_status' => NotificationStatusEnum::class,
     ];
 
-
-    protected static function newFactory(): NotificationFactory
-    {
-        //return NotificationFactory::new();
-    }
+    // protected static function newFactory(): NotificationFactory
+    // {
+    //     //return NotificationFactory::new();
+    // }
 }

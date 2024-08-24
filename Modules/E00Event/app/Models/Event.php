@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\B00User\Models\Lecturer;
 use Modules\D00Organization\Models\Organization;
-use Modules\E00Event\Database\Factories\EventFactory;
 use Modules\E00Event\Enums\EventPaidStatusEnum;
 use Modules\E00Event\Enums\EventStatusEnum;
 use Modules\E00Event\Enums\LecturerFinancialSystemEnum;
@@ -32,6 +31,8 @@ class Event extends BaseModel
         'title',
         'hall',
         'event_paid_status',
+        'university_id',
+        'college_id',
         'organizer_id',
         'description',
         'Lecturer_id',
@@ -80,8 +81,8 @@ class Event extends BaseModel
     //     return $this->hasMany(Reservation::class);
     // }
 
-    protected static function newFactory(): EventFactory
-    {
-        //return EventFactory::new();
-    }
+    // protected static function newFactory(): EventFactory
+    // {
+    //     //return EventFactory::new();
+    // }
 }
