@@ -14,6 +14,6 @@ use Modules\D00Organization\Http\Controllers\D00OrganizationController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('d00organization', D00OrganizationController::class)->names('d00organization');
-});
+// Route::group([], function () {
+//     Route::resource('d00organization', D00OrganizationController::class)->names('d00organization');
+// });

@@ -12,7 +12,6 @@ use Modules\D00Organization\Models\Organization;
 use Modules\E00Event\Enums\EventPaidStatusEnum;
 use Modules\E00Event\Enums\EventStatusEnum;
 use Modules\E00Event\Enums\LecturerFinancialSystemEnum;
-use Modules\F00Reservation\Models\Reservation;
 
 class Event extends BaseModel
 {

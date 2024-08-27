@@ -36,7 +36,7 @@ class PasswordApiController extends BaseApiController
             'password' => $request->new_password
         ]);
 
-        return $this->jsonResponse(
+        return $this->sendJsonResponse(
             message: __('messages.updated')
         );
     }
@@ -63,10 +63,10 @@ class PasswordApiController extends BaseApiController
         }
 
         if (!$user) {
-            return $this->jsonResponse(
+            return $this->sendJsonResponse(
                 success: false,
                 message: __('auth.phone'),
-                status: 404
+                statusCode: 404
             );
         }
 
@@ -75,7 +75,7 @@ class PasswordApiController extends BaseApiController
 
         // TODO: send sms to the phone with the dialing code
 
-        return $this->jsonResponse(
+        return $this->sendJsonResponse(
             message: __('auth.code_sent')
         );
     }
@@ -102,18 +102,18 @@ class PasswordApiController extends BaseApiController
         }
 
         if (!$user) {
-            return $this->jsonResponse(
+            return $this->sendJsonResponse(
                 success: false,
                 message: __('auth.phone'),
-                status: 404
+                statusCode: 404
             );
         }
 
         if (!ActivationCodeService::validate($request->mobile, $request->code, $table)) {
-            return $this->jsonResponse(
+            return $this->sendJsonResponse(
                 success: false,
                 message: __('auth.invalid_code'),
-                status: 400
+                statusCode: 400
             );
         }
 
@@ -122,7 +122,7 @@ class PasswordApiController extends BaseApiController
         $user->tokens()->delete();
         $data['token'] = $user->createToken('auth_token')->plainTextToken;
 
-        return $this->jsonResponse(
+        return $this->sendJsonResponse(
             data: $data,
             message: __('auth.valid_code')
         );
@@ -136,7 +136,7 @@ class PasswordApiController extends BaseApiController
             'password' => $request->new_password
         ]);
 
-        return $this->jsonResponse(
+        return $this->sendJsonResponse(
             message: __('messages.updated')
         );
     }

@@ -3,9 +3,10 @@
 namespace App\Http\Requests\Api;
 
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
+use Core\Requests\BaseApiFormRequest;
+// use Illuminate\Foundation\Http\FormRequest;
 
-class ResendOTPRequest extends FormRequest
+class ResendOTPRequest extends BaseApiFormRequest
 {
     protected function prepareForValidation()
     {
@@ -23,13 +24,13 @@ class ResendOTPRequest extends FormRequest
     {
         return [
             'country_id' => ['required', 'exists:lkp_countries,id'],
-            'phone' => ['required', 'string'],
+            'mobile' => ['required', 'string'],
         ];
     }
 
     protected function withValidator(Validator $validator)
     {
-        $validator->sometimes('phone', [
+        $validator->sometimes('mobile', [
             // new ValidPhoneLengthRule($this->input('country_id')),
         ], function ($input) {
             return $input->country_id !== null;

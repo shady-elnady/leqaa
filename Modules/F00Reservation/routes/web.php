@@ -14,6 +14,6 @@ use Modules\F00Reservation\Http\Controllers\F00ReservationController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('f00reservation', F00ReservationController::class)->names('f00reservation');
-});
+// Route::group([], function () {
+//     Route::resource('f00reservation', F00ReservationController::class)->names('f00reservation');
+// });

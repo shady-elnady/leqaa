@@ -7,7 +7,9 @@ use Core\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\H00Chat\Database\Factories\RoomFactory;
+use Modules\H00Chat\Enums\UserRanksEnum;
 
 class Room extends BaseModel
 {
@@ -24,19 +26,21 @@ class Room extends BaseModel
      */
     protected $fillable = [
         'title',
-        'creator_id',
-        'receiver_id',
+        'userable',
+        'user_rank',
         'is_private',
     ];
 
-    public function creator(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'creator_id');
-    }
+    protected $casts = [
+        'user_rank' => UserRanksEnum::class,
+    ];
 
-    public function receiver(): BelongsTo
+    /**
+     * Get the parent commentable model (post or video).
+     */
+    public function userable(): MorphTo
     {
-        return $this->belongsTo(User::class, 'receiver_id');
+        return $this->morphTo();
     }
 
     public function scopePrivate($query)

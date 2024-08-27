@@ -14,6 +14,6 @@ use Modules\H00Chat\Http\Controllers\H00ChatController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('h00chat', H00ChatController::class)->names('h00chat');
-});
+// Route::group([], function () {
+//     Route::resource('h00chat', H00ChatController::class)->names('h00chat');
+// });

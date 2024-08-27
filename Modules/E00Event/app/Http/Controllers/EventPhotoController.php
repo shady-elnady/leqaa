@@ -2,19 +2,33 @@
 
 namespace Modules\E00Event\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+use Core\Controllers\BaseApiController;
+use Modules\E00Event\Interfaces\EventPhotoRepositoryInterface;
+use Modules\E00Event\Transformers\EventPhotoResource;
+use Modules\E00Event\Http\Requests\EventPhotoRequest;
+use Modules\E00Event\Models\Event;
 
-class EventPhotoController extends Controller
+class EventPhotoController extends BaseApiController
 {
+    private EventPhotoRepositoryInterface $eventPhotoRepositoryInterface;
+
+    public function __construct(EventPhotoRepositoryInterface $eventPhotoRepositoryInterface)
+    {
+        $this->eventPhotoRepositoryInterface = $eventPhotoRepositoryInterface;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('e00event::index');
+        $data = $this->eventPhotoRepositoryInterface->index();
+
+        return $this->sendJsonResponse(
+            data: EventPhotoResource::collection($data),
+            statusCode: 200,
+        );
+        // return ApiResponseClass::sendResponse(EventResource::collection($data), '', 200);
     }
 
     /**
@@ -22,39 +36,77 @@ class EventPhotoController extends Controller
      */
     public function create()
     {
-        return view('e00event::create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(EventPhotoRequest $request)
     {
-        //
+        $details = [
+            'event_id' => $request->event_id,
+            'image' => $request->image,
+            'order' => $request->order,
+        ];
+        DB::beginTransaction();
+        try {
+            $event = $this->eventPhotoRepositoryInterface->store($details);
+
+            DB::commit();
+            return $this->sendJsonResponse(
+                data: new EventPhotoResource($event),
+                message: __('Event Photo Create Successful'),
+                statusCode: 201,
+            );
+        } catch (\Exception $ex) {
+            return $this->rollback($ex);
+        }
     }
 
     /**
-     * Show the specified resource.
+     * Display the specified resource.
      */
     public function show($id)
     {
-        return view('e00event::show');
+        $event = $this->eventPhotoRepositoryInterface->getById($id);
+
+        return $this->sendJsonResponse(
+            data: new EventPhotoResource($event),
+            statusCode: 200,
+        );
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Event $event)
     {
-        return view('e00event::edit');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(EventPhotoRequest $request, $id)
     {
-        //
+        $updateDetails = [
+            'event_id' => $request->event_id,
+            'image' => $request->image,
+            'order' => $request->order,
+        ];
+        DB::beginTransaction();
+        try {
+            $event = $this->eventPhotoRepositoryInterface->update($updateDetails, $id);
+
+            DB::commit();
+            return $this->sendJsonResponse(
+                message: __('Event Photo Update Successful'),
+                statusCode: 201,
+            );
+        } catch (\Exception $ex) {
+            return $this->rollback($ex);
+        }
     }
 
     /**
@@ -62,6 +114,16 @@ class EventPhotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $this->eventPhotoRepositoryInterface->delete($id);
+            DB::commit();
+            return $this->sendJsonResponse(
+                message: __('Event Photo Delete Successful'),
+                statusCode: 204
+            );
+        } catch (\Exception $ex) {
+            $this->rollback($ex, __('Event Photo Delete Successful'));
+        }
     }
 }

@@ -4,9 +4,10 @@ namespace App\Http\Requests\Api;
 
 use App\Enums\UserTypesEnum;
 use App\Rules\ValidPhoneLengthRule;
-use Illuminate\Foundation\Http\FormRequest;
+use Core\Requests\BaseApiFormRequest;
+// use Illuminate\Foundation\Http\FormRequest;
 
-class verifyOTPRequest extends FormRequest
+class VerifyOTPRequest extends BaseApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -18,8 +19,7 @@ class verifyOTPRequest extends FormRequest
         return [
             'code' => ['required', 'string', 'digits:4'],
             'account_type' => ['required', 'in:' . implode(',', UserTypesEnum::getValues())],
-            'country_id' => ['required', 'exists:lkp_countries,id'],
-            'phone' => [
+            'mobile' => [
                 'required',
                 'string',
                 // new ValidPhoneLengthRule($this->input('country_id')),

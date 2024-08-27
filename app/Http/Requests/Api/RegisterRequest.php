@@ -1,24 +1,19 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Support\Str;
 use App\Enums\UserTypesEnum;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Foundation\Http\FormRequest;
+use Core\Requests\BaseApiFormRequest;
+// use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rules;
 
-class LoginRequest extends FormRequest
+class RegisterRequest extends BaseApiFormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -31,14 +26,16 @@ class LoginRequest extends FormRequest
             'account_type' => ['required', 'in:' . implode(',', UserTypesEnum::getValues())],
             'mobile' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string', 'min:4', 'max:255'],
+            // 'password' => ['required', 'string', 'min:4', 'max:255'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password_confirmation' => 'required|same:password',
         ];
     }
 
     public function messages()
     {
         return [
-            'mobile' => __('auth.mobile')
+            'email' => __('auth.email')
         ];
     }
 
@@ -51,7 +48,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password', 'mobile'), $this->boolean('remember'))) {
+        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

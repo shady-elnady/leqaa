@@ -18,6 +18,8 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\H00Chat\Models\Room;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class BaseUserModel extends Model implements
     AuthenticatableContract,
@@ -85,6 +87,11 @@ class BaseUserModel extends Model implements
     public function setPasswordAttribute($value): void
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function rooms(): MorphMany
+    {
+        return $this->morphMany(Room::class, 'userable');
     }
 
 

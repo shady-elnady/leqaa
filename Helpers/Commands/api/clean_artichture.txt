@@ -1,0 +1,163 @@
+php artisan make:rule Uppercase
+php artisan make:rule Capitalzecase
+
+App:
+    Example:
+        php artisan make:interface /Interfaces/ProductRepositoryInterface
+        php artisan make:class /Repositories/ProductRepository
+        php artisan make:provider RepositoryServiceProvider // Ignore
+        php artisan make:class /Classes/ApiResponseClass // Global
+        php artisan make:resource ProductResource
+
+    Locale:
+        php artisan make:interface /Interfaces/LocaleRepositoryInterface
+        php artisan make:class /Repositories/LocaleRepository
+        php artisan make:resource LocaleResource
+
+    Currency:
+        php artisan make:interface /Interfaces/CurrencyRepositoryInterface
+        php artisan make:class /Repositories/CurrencyRepository
+        php artisan make:resource CurrencyResource
+
+    Setting:
+        php artisan make:interface SettingRepositoryInterface
+        php artisan make:class /Repositories/SettingRepository
+        php artisan make:resource SettingResource
+
+    Category:
+        php artisan make:interface CategoryRepositoryInterface
+        php artisan make:class /Repositories/CategoryRepository
+        php artisan make:resource CategoryResource
+
+
+ModuleName:
+    Model:
+        php artisan module:make-interface ModelRepositoryInterface ModuleName
+        php artisan module:make-repository ModelRepository ModuleName
+        php artisan module:make-provider ModelRepositoryServiceProvider ModuleName // Ignore
+        php artisan module:make-class ModelRepositoryServiceProvider ModuleName // Global
+        php artisan module:make-resource ModelResource ModuleName
+
+A00Contact:
+    Country:
+        php artisan module:make-interface CountryRepositoryInterface A00Contact
+        php artisan module:make-repository CountryRepository A00Contact
+        php artisan module:make-resource CountryResource A00Contact
+    Governorate:
+        php artisan module:make-interface GovernorateRepositoryInterface A00Contact
+        php artisan module:make-repository GovernorateRepository A00Contact
+        php artisan module:make-resource GovernorateResource A00Contact
+    Citiy:
+        php artisan module:make-interface CitiyRepositoryInterface A00Contact
+        php artisan module:make-repository CitiyRepository A00Contact
+        php artisan module:make-resource CitiyResource A00Contact
+    State:
+        php artisan module:make-interface StateRepositoryInterface A00Contact
+        php artisan module:make-repository StateRepository A00Contact
+        php artisan module:make-resource StateResource A00Contact
+    Locality:
+        php artisan module:make-interface LocalityRepositoryInterface A00Contact
+        php artisan module:make-repository LocalityRepository A00Contact
+        php artisan module:make-resource LocalityResource A00Contact
+    Street:
+        php artisan module:make-interface StreetRepositoryInterface A00Contact
+        php artisan module:make-repository StreetRepository A00Contact
+        php artisan module:make-resource StreetResource A00Contact
+    Address:
+        php artisan module:make-interface AddressRepositoryInterface A00Contact
+        php artisan module:make-repository AddressRepository A00Contact
+        php artisan module:make-resource AddressResource A00Contact
+
+B00User:
+    Admin:
+        php artisan module:make-interface AdminRepositoryInterface B00User
+        php artisan module:make-repository AdminRepository B00User
+        php artisan module:make-resource AdminResource B00User
+    Lecturer:
+        php artisan module:make-interface LecturerRepositoryInterface B00User
+        php artisan module:make-repository LecturerRepository B00User
+        php artisan module:make-resource LecturerResource B00User
+    Student:
+        php artisan module:make-interface StudentRepositoryInterface B00User
+        php artisan module:make-repository StudentRepository B00User
+        php artisan module:make-resource StudentResource B00User
+    Interest:
+        php artisan module:make-interface InterestRepositoryInterface B00User
+        php artisan module:make-repository InterestRepository B00User
+        php artisan module:make-resource InterestResource B00User
+
+C00Payment:
+    PaymentMethod:
+        php artisan module:make-interface PaymentMethodRepositoryInterface C00Payment
+        php artisan module:make-repository PaymentMethodRepository C00Payment
+        php artisan module:make-resource PaymentMethodResource C00Payment
+    PaymentStatus:
+        php artisan module:make-interface PaymentStatusRepositoryInterface C00Payment
+        php artisan module:make-repository PaymentStatusRepository C00Payment
+        php artisan module:make-resource PaymentStatusResource C00Payment
+    Transaction:
+        php artisan module:make-interface TransactionRepositoryInterface C00Payment
+        php artisan module:make-repository TransactionRepository C00Payment
+        php artisan module:make-resource TransactionResource C00Payment
+
+D00Organization:
+    College:
+        php artisan module:make-interface CollegeRepositoryInterface D00Organization
+        php artisan module:make-repository CollegeRepository D00Organization
+        php artisan module:make-resource CollegeResource D00Organization
+    OrganizationType:
+        php artisan module:make-interface OrganizationTypeRepositoryInterface D00Organization
+        php artisan module:make-repository OrganizationTypeRepository D00Organization
+        php artisan module:make-resource OrganizationTypeResource D00Organization
+    University:
+        php artisan module:make-interface UniversityRepositoryInterface D00Organization
+        php artisan module:make-repository UniversityRepository D00Organization
+        php artisan module:make-resource UniversityResource D00Organization
+    Organization:
+        php artisan module:make-interface OrganizationRepositoryInterface D00Organization
+        php artisan module:make-repository OrganizationRepository D00Organization
+        php artisan module:make-resource OrganizationResource D00Organization
+
+E00Event:
+    EventType:
+        php artisan module:make-interface EventTypeRepositoryInterface E00Event
+        php artisan module:make-repository EventTypeRepository E00Event
+        php artisan module:make-resource EventTypeResource E00Event
+    Event:
+        php artisan module:make-interface EventRepositoryInterface E00Event
+        php artisan module:make-repository EventRepository E00Event
+        php artisan module:make-resource EventResource E00Event
+    EventPhoto:
+        php artisan module:make-interface EventPhotoRepositoryInterface E00Event
+        php artisan module:make-repository EventPhotoRepository E00Event
+        php artisan module:make-resource EventPhotoResource E00Event
+
+F00Reservation:
+    Reservation:
+        php artisan module:make-interface ReservationRepositoryInterface F00Reservation
+        php artisan module:make-repository ReservationRepository F00Reservation
+        php artisan module:make-resource ReservationResource F00Reservation
+
+G00Notification:
+    Notification:
+        php artisan module:make-interface NotificationRepositoryInterface G00Notification
+        php artisan module:make-repository NotificationRepository G00Notification
+        php artisan module:make-resource NotificationResource G00Notification
+
+H00Chat:
+    Room:
+        php artisan module:make-interface RoomRepositoryInterface H00Chat
+        php artisan module:make-repository RoomRepository H00Chat
+        php artisan module:make-resource RoomResource H00Chat
+    Message:
+        php artisan module:make-interface MessageRepositoryInterface H00Chat
+        php artisan module:make-repository MessageRepository H00Chat
+        php artisan module:make-resource MessageResource H00Chat
+    MessageFile:
+        php artisan module:make-interface MessageFileRepositoryInterface H00Chat
+        php artisan module:make-repository MessageFileRepository H00Chat
+        php artisan module:make-resource MessageFileResource H00Chat
+    Faq:
+        php artisan module:make-interface FaqRepositoryInterface H00Chat
+        php artisan module:make-repository FaqRepository H00Chat
+        php artisan module:make-resource FaqResource H00Chat

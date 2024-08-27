@@ -6,6 +6,7 @@ use App\Enums\GendersEnum;
 use Illuminate\Database\Seeder;
 use Modules\B00User\Models\Admin;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {
@@ -26,7 +27,7 @@ class AdminSeeder extends Seeder
                 'email_verified_at' => $timeNow,
                 'mobile_verified_at' => $timeNow,
                 'last_login' => $timeNow,
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'password' => Hash::make('password'),
                 'remember_token' => Str::random(10),
                 // 'avatar' => fake()->image(),
                 'gender' => GendersEnum::Male->value,

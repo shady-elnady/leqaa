@@ -14,7 +14,7 @@ use App\Models\User;
 
 class VerificationController extends BaseApiController
 {
-    public function resend(ApiResendOTPRequest $request)
+    public function __invoke(ApiResendOTPRequest $request)
     {
         $user = auth()->user();
 
@@ -28,7 +28,7 @@ class VerificationController extends BaseApiController
 
         ActivationCodeService::generate($request->mobile, $table);
 
-        return $this->jsonResponse(
+        return $this->sendJsonResponse(
             message: __('auth.code_sent')
         );
     }

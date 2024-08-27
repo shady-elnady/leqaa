@@ -2,9 +2,10 @@
 
 namespace Modules\A00Contact\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Core\Requests\BaseApiFormRequest;
+// use Illuminate\Foundation\Http\FormRequest;
 
-class GovernorateRequest extends FormRequest
+class GovernorateRequest extends BaseApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,7 +13,8 @@ class GovernorateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'image' => ['nullable', 'extensions:jpg,png', 'mimes:jpg,bmp,png'],
+            'translations' => ['required', 'json'],
         ];
     }
 

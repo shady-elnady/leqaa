@@ -2,9 +2,10 @@
 
 namespace Modules\A00Contact\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Core\Requests\BaseApiFormRequest;
+// use Illuminate\Foundation\Http\FormRequest;
 
-class CountryRequest extends FormRequest
+class CountryRequest extends BaseApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -13,6 +14,10 @@ class CountryRequest extends FormRequest
     {
         return [
             //
+            'timezone' => 'required|timezone:all'
+            'image' => ['nullable', 'extensions:jpg,png', 'mimes:jpg,bmp,png'],
+            'translations' => ['required', 'json'],
+
         ];
     }
 

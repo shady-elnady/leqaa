@@ -22,7 +22,6 @@ class StudentResource extends JsonResource
             'last_name' => $this->whenNotNull($this->last_name),
             'username' => $this->whenNotNull($this->username),
             'created_at' => str_replace(' ago', '', $this->created_at->diffForHumans()),
-            'is_active' => $this->is_active,
             // 'country' => CountryResource::make($this->whenLoaded('country')),
             // 'media' => $this->getMedia(),
             // 'contact_info' => $this->getContactInfo(),

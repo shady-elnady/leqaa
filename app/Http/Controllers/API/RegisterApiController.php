@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Validator;
+use Core\Controllers\BaseApiController;
 use Illuminate\Http\JsonResponse;
-use Nette\Utils\Validators;
+use Modules\B00User\Resources\AdminResource;
+use Modules\B00User\Resources\LecturerResource;
+use Modules\B00User\Resources\StudentResource;
+use App\Http\Resources\UserResource;
+use App\Enums\UserTypesEnum;
+use App\Http\Requests\Api\RegisterRequest;
+use Modules\B00User\Models\Admin;
+use Modules\B00User\Models\Lecturer;
+use Modules\B00User\Models\Student;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterApiController extends BaseApiController
 {
@@ -16,25 +24,56 @@ class RegisterApiController extends BaseApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(RegisterRequest $request): JsonResponse
     {
-        $validator = Validators::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'c_password' => 'required|same:password',
-        ]);
+        $validatedData = $request->validated();
 
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
+        $userType = $validatedData['account_type'];
+
+        switch ($userType) {
+            case UserTypesEnum::User->value:
+                $model = User::class;
+                $resource = UserResource::class;
+                $userType = UserTypesEnum::User->value;
+                break;
+            case UserTypesEnum::Admin->value:
+                $model = Admin::class;
+                $resource = AdminResource::class;
+                $userType = UserTypesEnum::Admin->value;
+                break;
+            case UserTypesEnum::Lecturer->value:
+                $model = Lecturer::class;
+                $resource = LecturerResource::class;
+                $userType = UserTypesEnum::Lecturer->value;
+                break;
+            case UserTypesEnum::Student->value:
+                $model = Student::class;
+                $resource = StudentResource::class;
+                $userType = UserTypesEnum::Student->value;
+                break;
         }
 
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->plainTextToken;
-        $success['name'] =  $user->name;
-
-        return $this->sendResponse($success, 'User register successfully.');
+        DB::beginTransaction();
+        try {
+            $user = $model::create(
+                [
+                    'mobile' => $validatedData['mobile'],
+                    'email' => $validatedData['email'],
+                    'password' => Hash::make($request->string($validatedData['email'])), //bcrypt($input['password']);
+                ]
+            );
+            DB::commit();
+            $data['user'] = $resource::make($user);
+            return $this->sendJsonResponse(
+                data: $data,
+                message: __("{$userType} Created Successful"),
+                statusCode: 201,
+            );
+        } catch (\Exception $ex) {
+            return $this->rollback(
+                $ex,
+                __("Failed {$userType} Register")
+            );
+        }
     }
 }

@@ -2,9 +2,13 @@
 
 namespace Modules\H00Chat\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Core\Requests\BaseApiFormRequest;
+use Illuminate\Validation\Rule;
+use Modules\H00Chat\Enums\UserRanksEnum;
 
-class RoomRequest extends FormRequest
+// use Illuminate\Foundation\Http\FormRequest;
+
+class RoomRequest extends BaseApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,7 +16,10 @@ class RoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'unique:Modules\H00Chat\Models\Room,title', 'max:255'],
+            'userable' => ['nullable', 'exists:App\Models\User,id'],
+            'user_rank' => ['nullable', Rule::enum(UserRanksEnum::class)],
+            'is_private' => 'boolean',
         ];
     }
 

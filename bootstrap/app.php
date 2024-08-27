@@ -8,14 +8,17 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__ . '/../routes/web.php',
         api: __DIR__ . '/../routes/api.php',
+        apiPrefix: 'api/v1',
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->api(prepend: [
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
+            // 'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\ApiLanguage::class,
+            // \App\Http\Middleware\IsActive::class,
         ]);
 
         $middleware->alias([
@@ -34,9 +37,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'isActive' => \App\Http\Middleware\IsActive::class,
         ]);
 
-        $middleware->web(prepend: [
-            'isAdmin' => \App\Http\Middleware\IsAdmin::class,
-        ]);
+        // $middleware->web(prepend: [
+        //     'isAdmin' => \App\Http\Middleware\IsAdmin::class,
+        // ]);
 
         // $middleware->appendToGroup('web', \App\Http\Middleware\MyMiddleware::class);
         // $middleware->prependToGroup('web', \App\Http\Middleware\MyMiddleware::class);

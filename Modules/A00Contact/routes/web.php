@@ -14,6 +14,6 @@ use Modules\A00Contact\Http\Controllers\A00ContactController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('a00contact', A00ContactController::class)->names('a00contact');
-});
+// Route::group([], function () {
+//     Route::resource('a00contact', A00ContactController::class)->names('a00contact');
+// });

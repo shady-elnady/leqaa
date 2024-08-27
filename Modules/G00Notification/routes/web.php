@@ -14,6 +14,6 @@ use Modules\G00Notification\Http\Controllers\G00NotificationController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('g00notification', G00NotificationController::class)->names('g00notification');
-});
+// Route::group([], function () {
+//     Route::resource('g00notification', G00NotificationController::class)->names('g00notification');
+// });

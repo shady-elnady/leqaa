@@ -2,9 +2,10 @@
 
 namespace Modules\H00Chat\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Core\Requests\BaseApiFormRequest;
+// use Illuminate\Foundation\Http\FormRequest;
 
-class MessageFileRequest extends FormRequest
+class MessageFileRequest extends BaseApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,7 +13,8 @@ class MessageFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'image' => ['nullable', 'extensions:jpg,png', 'mimes:jpg,bmp,png'],
+            'translations' => ['required', 'json'],
         ];
     }
 

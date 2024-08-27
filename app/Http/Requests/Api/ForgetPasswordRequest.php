@@ -4,9 +4,10 @@ namespace App\Http\Requests\Api;
 
 use App\Enums\UserTypesEnum;
 use App\Rules\ValidPhoneLengthRule;
-use Illuminate\Foundation\Http\FormRequest;
+use Core\Requests\BaseApiFormRequest;
+// use Illuminate\Foundation\Http\FormRequest;
 
-class ForgetPasswordRequest extends FormRequest
+class ForgetPasswordRequest extends BaseApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -21,7 +22,7 @@ class ForgetPasswordRequest extends FormRequest
                 'required',
                 'string',
                 // new ValidPhoneLengthRule($this->input('country_id')),
-            ]
+            ],
         ];
     }
 }

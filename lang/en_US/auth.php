@@ -13,12 +13,13 @@ return [
     |
     */
 
-    'failed' => 'Mobile and Password did not match',
+    'failed' => 'Email and Password did not match',
     'logged_out' => 'Logged out successfully',
     'password' => 'The provided password is incorrect',
     'current_password' => 'The current password is incorrect',
-    'phone' => 'Invalid phone number',
-    'phone_length' => 'The phone number length is invalid for the selected country',
+    'mobile' => 'Invalid Mobile number',
+    'email' => 'Invalid E-Mail',
+    'mobile_length' => 'The Mobile number length is invalid for the selected country',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds',
     'inactive' => 'Your account is inactive',
     'code_sent' => 'OTP code sent successfully',

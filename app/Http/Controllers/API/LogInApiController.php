@@ -9,11 +9,11 @@ use Modules\B00User\Models\Student;
 use App\Models\User;
 use Core\Controllers\BaseApiController;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Api\LoginRequest;
 use Modules\B00User\Resources\AdminResource;
 use Modules\B00User\Resources\LecturerResource;
 use Modules\B00User\Resources\StudentResource;
-use App\Resources\UserResource;
+use App\Http\Resources\UserResource;
 
 class LogInApiController extends BaseApiController
 {
@@ -28,53 +28,49 @@ class LogInApiController extends BaseApiController
             case UserTypesEnum::User->value:
                 $model = User::class;
                 $resource = UserResource::class;
-                $column = 'mobile';
                 break;
             case UserTypesEnum::Admin->value:
                 $model = Admin::class;
                 $resource = AdminResource::class;
-                $column = 'mobile';
                 break;
             case UserTypesEnum::Lecturer->value:
                 $model = Lecturer::class;
                 $resource = LecturerResource::class;
-                $column = 'mobile';
                 break;
             case UserTypesEnum::Student->value:
                 $model = Student::class;
                 $resource = StudentResource::class;
-                $column = 'mobile';
                 break;
         }
 
         $user = $model::where(
-            $column,
-            $validatedData['mobile']
+            'email',
+            $validatedData['email']
         )->first();
 
         if (!$user) {
-            return $this->jsonResponse(
+            return $this->sendJsonResponse(
                 message: __('auth.failed'),
                 success: false,
-                status: 401
+                statusCode: 401
             );
         }
 
         if (!$user->password || !Hash::check($request->password, $user->password)) {
-            return $this->jsonResponse(
+            return $this->sendJsonResponse(
                 message: __('auth.failed'),
                 success: false,
-                status: 401
+                statusCode: 401
             );
         }
 
         $data['user'] = $resource::make($user)->additional([
-            'token' => $user->createToken($validatedData['mobile'])->plainTextToken,
+            'token' => $user->createToken($validatedData['email'])->plainTextToken,
         ]);
 
-        return $this->jsonResponse(
+        return $this->sendJsonResponse(
             data: $data,
-            status: 200
+            statusCode: 200,
         );
     }
 }

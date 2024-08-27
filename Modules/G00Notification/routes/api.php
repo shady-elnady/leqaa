@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\G00Notification\Http\Controllers\G00NotificationController;
+use Modules\G00Notification\Http\Controllers\NotificationController;
 
 /*
  *--------------------------------------------------------------------------
@@ -14,6 +15,12 @@ use Modules\G00Notification\Http\Controllers\G00NotificationController;
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('g00notification', G00NotificationController::class)->names('g00notification');
+// Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
+//     Route::apiResource('g00notification', G00NotificationController::class)->names('g00notification');
+// });
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::middleware('isActive')->group(function () {
+        Route::apiResource('/notifications', NotificationController::class);
+    });
 });

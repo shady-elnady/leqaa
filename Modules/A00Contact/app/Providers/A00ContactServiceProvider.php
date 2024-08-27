@@ -4,6 +4,20 @@ namespace Modules\A00Contact\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\A00Contact\Interfaces\AddressRepositoryInterface;
+use Modules\A00Contact\Interfaces\CityRepositoryInterface;
+use Modules\A00Contact\Interfaces\CountryRepositoryInterface;
+use Modules\A00Contact\Interfaces\GovernorateRepositoryInterface;
+use Modules\A00Contact\Interfaces\LocalityRepositoryInterface;
+use Modules\A00Contact\Interfaces\StateRepositoryInterface;
+use Modules\A00Contact\Interfaces\StreetRepositoryInterface;
+use Modules\A00Contact\Repositories\AddressRepository;
+use Modules\A00Contact\Repositories\CityRepository;
+use Modules\A00Contact\Repositories\CountryRepository;
+use Modules\A00Contact\Repositories\GovernorateRepository;
+use Modules\A00Contact\Repositories\LocalityRepository;
+use Modules\A00Contact\Repositories\StateRepository;
+use Modules\A00Contact\Repositories\StreetRepository;
 
 class A00ContactServiceProvider extends ServiceProvider
 {
@@ -31,6 +45,14 @@ class A00ContactServiceProvider extends ServiceProvider
     {
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+        //
+        $this->app->bind(AddressRepositoryInterface::class, AddressRepository::class);
+        $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
+        $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
+        $this->app->bind(GovernorateRepositoryInterface::class, GovernorateRepository::class);
+        $this->app->bind(LocalityRepositoryInterface::class, LocalityRepository::class);
+        $this->app->bind(StateRepositoryInterface::class, StateRepository::class);
+        $this->app->bind(StreetRepositoryInterface::class, StreetRepository::class);
     }
 
     /**
@@ -57,7 +79,7 @@ class A00ContactServiceProvider extends ServiceProvider
      */
     public function registerTranslations(): void
     {
-        $langPath = resource_path('lang/modules/'.$this->moduleNameLower);
+        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
@@ -73,7 +95,7 @@ class A00ContactServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): void
     {
-        $this->publishes([module_path($this->moduleName, 'config/config.php') => config_path($this->moduleNameLower.'.php')], 'config');
+        $this->publishes([module_path($this->moduleName, 'config/config.php') => config_path($this->moduleNameLower . '.php')], 'config');
         $this->mergeConfigFrom(module_path($this->moduleName, 'config/config.php'), $this->moduleNameLower);
     }
 
@@ -82,14 +104,14 @@ class A00ContactServiceProvider extends ServiceProvider
      */
     public function registerViews(): void
     {
-        $viewPath = resource_path('views/modules/'.$this->moduleNameLower);
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
         $sourcePath = module_path($this->moduleName, 'resources/views');
 
-        $this->publishes([$sourcePath => $viewPath], ['views', $this->moduleNameLower.'-module-views']);
+        $this->publishes([$sourcePath => $viewPath], ['views', $this->moduleNameLower . '-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
 
-        $componentNamespace = str_replace('/', '\\', config('modules.namespace').'\\'.$this->moduleName.'\\'.ltrim(config('modules.paths.generator.component-class.path'), config('modules.paths.app_folder', '')));
+        $componentNamespace = str_replace('/', '\\', config('modules.namespace') . '\\' . $this->moduleName . '\\' . ltrim(config('modules.paths.generator.component-class.path'), config('modules.paths.app_folder', '')));
         Blade::componentNamespace($componentNamespace, $this->moduleNameLower);
     }
 
@@ -110,8 +132,8 @@ class A00ContactServiceProvider extends ServiceProvider
     {
         $paths = [];
         foreach (config('view.paths') as $path) {
-            if (is_dir($path.'/modules/'.$this->moduleNameLower)) {
-                $paths[] = $path.'/modules/'.$this->moduleNameLower;
+            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
             }
         }
 

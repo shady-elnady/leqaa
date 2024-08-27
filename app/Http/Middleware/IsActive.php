@@ -6,6 +6,7 @@ use App\Traits\ApiResponse;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class IsActive
 {
@@ -18,13 +19,13 @@ class IsActive
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->user()->is_active) {
-            return $this->jsonResponse(
-                message: __('auth.inactive'),
-                success: false,
-                status: 401
-            );
-        }
+        // if (!auth()->user()->is_active) {
+        //     return $this->jsonResponse(
+        //         message: __('auth.inactive'),
+        //         success: false,
+        //         status: 401
+        //     );
+        // }
 
         return $next($request);
     }

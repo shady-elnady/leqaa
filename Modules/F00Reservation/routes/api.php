@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\F00Reservation\Http\Controllers\F00ReservationController;
+use Modules\F00Reservation\Http\Controllers\ReservationController;
 
 /*
  *--------------------------------------------------------------------------
@@ -14,6 +15,12 @@ use Modules\F00Reservation\Http\Controllers\F00ReservationController;
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('f00reservation', F00ReservationController::class)->names('f00reservation');
+// Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
+//     Route::apiResource('f00reservation', F00ReservationController::class)->names('f00reservation');
+// });
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::middleware('isActive')->group(function () {
+        Route::apiResource('/reservations', ReservationController::class);
+    });
 });

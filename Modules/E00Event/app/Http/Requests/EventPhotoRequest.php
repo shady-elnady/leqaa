@@ -2,9 +2,11 @@
 
 namespace Modules\E00Event\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Core\Requests\BaseApiFormRequest;
 
-class EventPhotoRequest extends FormRequest
+// use Illuminate\Foundation\Http\FormRequest;
+
+class EventPhotoRequest extends BaseApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,7 +14,9 @@ class EventPhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'event_id' => ['required', 'exists:Modules\E00Event\Models\Event,id'],
+            'image' => ['nullable', 'extensions:jpg,png', 'mimes:jpg,bmp,png'],
+            'order' => ['nullable', 'integer|size:50'],
         ];
     }
 

@@ -17,4 +17,12 @@ class BaseFormRequest extends FormRequest
         parent::__construct($attributes);
         $this->base_dir = strtolower($this->getModuleName());
     }
+
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
 }

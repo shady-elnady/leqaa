@@ -2,9 +2,10 @@
 
 namespace Modules\D00Organization\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Core\Requests\BaseApiFormRequest;
+// use Illuminate\Foundation\Http\FormRequest;
 
-class OrganizationRequest extends FormRequest
+class OrganizationRequest extends BaseApiFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,7 +13,8 @@ class OrganizationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'image' => ['nullable', 'extensions:jpg,png', 'mimes:jpg,bmp,png'],
+            'translations' => ['required', 'json'],
         ];
     }
 

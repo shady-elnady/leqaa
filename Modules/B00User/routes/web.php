@@ -14,6 +14,6 @@ use Modules\B00User\Http\Controllers\B00UserController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('b00user', B00UserController::class)->names('b00user');
-});
+// Route::group([], function () {
+//     Route::resource('b00user', B00UserController::class)->names('b00user');
+// });

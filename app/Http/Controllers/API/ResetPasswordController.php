@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Core\Controllers\BaseApiController;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,14 +13,14 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 
-class NewPasswordController extends Controller
+class ResetPasswordController extends BaseApiController
 {
     /**
      * Handle an incoming new password request.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         $request->validate([
             'token' => ['required'],
@@ -49,5 +50,9 @@ class NewPasswordController extends Controller
         }
 
         return response()->json(['status' => __($status)]);
+        return $this->sendJsonResponse(
+            message: __('messages.updated'),
+            statusCode: __($status),
+        );
     }
 }

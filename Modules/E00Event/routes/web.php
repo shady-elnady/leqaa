@@ -14,6 +14,6 @@ use Modules\E00Event\Http\Controllers\E00EventController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('e00event', E00EventController::class)->names('e00event');
-});
+// Route::group([], function () {
+//     Route::resource('e00event', E00EventController::class)->names('e00event');
+// });

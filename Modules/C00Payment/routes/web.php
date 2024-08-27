@@ -14,6 +14,6 @@ use Modules\C00Payment\Http\Controllers\C00PaymentController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('c00payment', C00PaymentController::class)->names('c00payment');
-});
+// Route::group([], function () {
+//     Route::resource('c00payment', C00PaymentController::class)->names('c00payment');
+// });
