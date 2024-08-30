@@ -2,8 +2,10 @@
 
 namespace Modules\E00Event\Models;
 
+use App\Models\Locale;
 use Core\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class EventType extends BaseModel
@@ -27,5 +29,10 @@ class EventType extends BaseModel
     public function events(): HasMany
     {
         return $this->hasMany(Event::class);
+    }
+
+    public function locale(): BelongsTo
+    {
+        return $this->belongsTo(Locale::class);
     }
 }

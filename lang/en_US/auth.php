@@ -12,15 +12,19 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'failed' => 'These credentials do not match our records.',
+    'password' => 'The provided password is incorrect.',
+    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
-    'failed' => 'Email and Password did not match',
+    'socialite' => [
+        'link_exists' => 'Account already exists',
+        'link_success' => 'Account linked',
+    ],
     'logged_out' => 'Logged out successfully',
-    'password' => 'The provided password is incorrect',
     'current_password' => 'The current password is incorrect',
     'mobile' => 'Invalid Mobile number',
     'email' => 'Invalid E-Mail',
     'mobile_length' => 'The Mobile number length is invalid for the selected country',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds',
     'inactive' => 'Your account is inactive',
     'code_sent' => 'OTP code sent successfully',
     'valid_code' => 'The activation code is valid',

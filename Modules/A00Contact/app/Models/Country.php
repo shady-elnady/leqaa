@@ -24,6 +24,7 @@ class Country extends BaseModel
      * The attributes that are mass assignable.
      */
     protected $fillable = [
+        'image',
         'continent',
         'country_code',
         'flag_emoji',
@@ -31,6 +32,8 @@ class Country extends BaseModel
         'timezone',
         'currency_id',
         'language_id',
+        'mobile_number_length',
+        'phone_number_length',
         'translations',
     ];
 
@@ -59,11 +62,20 @@ class Country extends BaseModel
         return $this->belongsTo(LanguageModel::class, 'language_id');
     }
 
-
     public function governorates(): HasMany
     {
         return $this->hasMany(Governorate::class);
     }
+
+    // function getDisplayFlagEmojiiAttribute(): string
+    // {
+    //     return html_entity_decode('&#x1F1EA;');
+    //     // return preg_replace_callback(
+    //     //     '/./',
+    //     //     static fn(array $m) => chr(ord($m[0]) + 0x1F1A5),
+    //     //     strtoupper($this->flag_emoji)
+    //     // );
+    // }
 
     // protected static function newFactory(): CountryFactory
     // {

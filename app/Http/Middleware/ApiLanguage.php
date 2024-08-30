@@ -24,10 +24,10 @@ class ApiLanguage
         $language = $request->header('Accept-Language');
 
         if (is_null($language)) {
-            return $this->jsonResponse(
+            return $this->sendJsonResponse(
                 success: false,
                 message: __('auth.language_not_provided'),
-                status: 400
+                statusCode: 400,
             );
         }
 

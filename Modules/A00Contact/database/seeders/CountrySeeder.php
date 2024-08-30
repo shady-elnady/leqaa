@@ -13,6 +13,7 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
+        // https://flagpedia.net/emoji
         $countries = [
             [
                 'continent' => ContinentsEnum::Asia->value,
@@ -20,7 +21,7 @@ class CountrySeeder extends Seeder
                 'flag_emoji' => '',
                 'tel_code' => '966',
                 'mobile_number_length' => 11,
-                'phone_numberlength' => 10,
+                'phone_number_length' => 10,
                 'timezone' => 'UTC+03:00',
                 'currency_id' => 14,
                 'language_id' => 1,
@@ -37,7 +38,7 @@ class CountrySeeder extends Seeder
                 'flag_emoji' => '🇪🇬',
                 'tel_code' => '002',
                 'mobile_number_length' => 11,
-                'phone_numberlength' => 13,
+                'phone_number_length' => 13,
                 'timezone' => 'UTC+02:00',
                 'currency_id' => 7,
                 'language_id' => 1,
@@ -54,7 +55,7 @@ class CountrySeeder extends Seeder
                 'flag_emoji' => 'US',
                 'tel_code' => '',
                 'mobile_number_length' => 11,
-                'phone_numberlength' => 13,
+                'phone_number_length' => 13,
                 'timezone' => 'UTC+02:00',
                 'currency_id' => 1,
                 'language_id' => 2,
@@ -71,7 +72,7 @@ class CountrySeeder extends Seeder
                 'flag_emoji' => '🇫🇷',
                 'tel_code' => '33',
                 'mobile_number_length' => 11,
-                'phone_numberlength' => 13,
+                'phone_number_length' => 13,
                 'timezone' => 'UTC+02:00',
                 'currency_id' => 17,
                 'language_id' => 3,
@@ -88,7 +89,7 @@ class CountrySeeder extends Seeder
                 'flag_emoji' => '🇦🇪',
                 'tel_code' => '971',
                 'mobile_number_length' => 11,
-                'phone_numberlength' => 13,
+                'phone_number_length' => 13,
                 'timezone' => 'UTC+02:00',
                 'currency_id' => 16,
                 'language_id' => 3,
@@ -108,7 +109,7 @@ class CountrySeeder extends Seeder
                     'flag_emoji' => $country['flag_emoji'],
                     'tel_code' => $country['tel_code'],
                     'mobile_number_length' => $country['mobile_number_length'],
-                    'phone_numberlength' => $country['phone_numberlength'],
+                    'phone_number_length' => $country['phone_number_length'],
                     'timezone' => $country['timezone'],
                     'currency_id' => $country['currency_id'],
                     'language_id' => $country['language_id'],

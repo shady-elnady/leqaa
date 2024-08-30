@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Core\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\A00Contact\Models\Country;
-use App\Models\Language as languageModel;
+use App\Models\Language as LangModel;
 // use Illuminate\Support\Str;
 
 class Locale extends BaseModel
@@ -25,9 +25,9 @@ class Locale extends BaseModel
         'locale_code',
     ];
 
-    public function language(): BelongsTo
+    public function language()
     {
-        return $this->belongsTo(languageModel::class, 'language_id');
+        return $this->belongsTo(LangModel::class, 'language_id');
     }
 
     public function country(): BelongsTo
@@ -41,4 +41,5 @@ class Locale extends BaseModel
     //     $country_code = Str::upper($this->country->country_code);
     //     return "{$language_code}_{$country_code}";
     // }
+
 }

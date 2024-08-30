@@ -21,4 +21,40 @@ enum EventPaidStatusEnum: string
             self::CompletelyPaid => 'CompletelyPaid',
         };
     }
+
+    public function toString(): ?string
+    {
+        return match ($this) {
+            self::CompletelyFree => 'CompletelyFree',
+            self::PartiallyPaid => 'PartiallyPaid',
+            self::CompletelyPaid => 'CompletelyPaid',
+        };
+    }
+
+    public function getColor(): ?string
+    {
+        return match ($this) {
+            self::CompletelyFree => 'info',
+            self::PartiallyPaid => 'gray',
+            self::CompletelyPaid => 'success',
+        };
+    }
 }
+
+
+/*
+    Available colors:
+        primary
+        secondary
+        success
+        warning
+        error
+        info
+        purple
+        pink
+        blue
+        green
+        yellow
+        red
+        gray
+*/

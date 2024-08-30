@@ -21,6 +21,7 @@ class Language extends BaseModel
         'native_name',
         'language_iso_code',
         'is_bidirectional',
+        'translations'
     ];
 
     /**
@@ -29,5 +30,13 @@ class Language extends BaseModel
     public function countries(): HasMany
     {
         return $this->hasMany(Country::class);
+    }
+
+    /**
+     * has Many Relations Ship
+     */
+    public function locales(): HasMany
+    {
+        return $this->hasMany(Locale::class);
     }
 }

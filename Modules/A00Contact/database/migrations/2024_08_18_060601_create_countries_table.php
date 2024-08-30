@@ -14,12 +14,13 @@ return new class extends BaseContactMigration
     {
         Schema::create("{$this->base_dir}_countries", function (Blueprint $table) {
             $this->defaultColumns($table);
+            $this->imageColumn($table);
             $table->enum('continent', ContinentsEnum::getValues());
             $table->string('flag_emoji')->nullable();
             $table->string('country_code')->nullable()->unique();
             $table->string('tel_code')->nullable()->unique();
             $table->unsignedSmallInteger('mobile_number_length')->nullable();
-            $table->unsignedSmallInteger('phone_numberlength')->nullable();
+            $table->unsignedSmallInteger('phone_number_length')->nullable();
             $table->string('timezone')->default('UTC');
             $table->foreignId('currency_id')->nullable()->constrained("currencies")->nullOnDelete();
             $table->foreignId('language_id')->nullable()->constrained("languages")->nullOnDelete();
