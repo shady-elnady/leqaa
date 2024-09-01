@@ -6,19 +6,11 @@ namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 use MoonShine\Resources\ModelResource;
-use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
-use App\Models\Locale;
-use Modules\A00Contact\Enums\ContinentsEnum;
 use Modules\B00User\Models\Interest;
-use MoonShine\Fields\Image;
-use MoonShine\Fields\Json;
-use MoonShine\Fields\Text;
-use MoonShine\Fields\Select;
-use MoonShine\ActionButtons\ActionButton;
-use MoonShine\Fields\Enum;
+use MoonShine\Fields\Number;
 use MoonShine\Fields\Relationships\BelongsTo;
 
 /**
@@ -37,17 +29,14 @@ class InterestResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
-            Text::make('Name')->nullable(),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            BelongsTo::make('Student', 'student', 'name', resource: new StudentResource()),
+            BelongsTo::make('Category', 'category', 'name', resource: new CategoryResource()),
+            Number::make('Order')
+                ->hint('From 0 to 10')
+                ->stars()
+                ->min(1)
+                ->max(10)
+                ->default(1),
         ];
     }
 
@@ -58,31 +47,14 @@ class InterestResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
-            Block::make(
-                'Translations',
-                [
-                    Json::make(null, 'translations')->keyValue(
-                        keyField: Select::make('Locale', 'locale')->options(Locale::select('locale_code')->get()->mapWithKeys(function (Locale $locale) {
-                            return [$locale['locale_code'] => $locale['locale_code']];
-                        })->toArray()),
-                        valueField: Text::make('Translation')->required(),
-                    )->creatable(
-                        limit: 5,
-                        button: ActionButton::make('Add New Translation', '#')->success()->icon('heroicons.outline.plus')->customAttributes(['class' => 'btn-lg']),
-                    )
-                        ->removable(),
-                ]
-            ),
+            BelongsTo::make('Student', 'student', 'name', resource: new StudentResource()),
+            BelongsTo::make('Category', 'category', 'name', resource: new CategoryResource()),
+            Number::make('Order')
+                ->hint('From 0 to 10')
+                ->stars()
+                ->min(1)
+                ->max(10)
+                ->default(1),
         ];
     }
 
@@ -93,23 +65,14 @@ class InterestResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
-            Text::make('Name')->nullable(),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
-            Block::make(
-                'Translations',
-                [
-                    Json::make('Translations', 'translations')->keyValue('Locale', 'Translation'),
-                ]
-            ),
+            BelongsTo::make('Student', 'student', 'name', resource: new StudentResource()),
+            BelongsTo::make('Category', 'category', 'name', resource: new CategoryResource()),
+            Number::make('Order')
+                ->hint('From 0 to 10')
+                ->stars()
+                ->min(1)
+                ->max(10)
+                ->default(1),
         ];
     }
 

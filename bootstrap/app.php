@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\IsActive;
+use App\Http\Middleware\ApiLanguage;
 use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,8 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             // 'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\ApiLanguage::class,
-            // \App\Http\Middleware\IsActive::class,
+            ApiLanguage::class,
+            IsActive::class,
         ]);
 
         $middleware->alias([
@@ -34,8 +36,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'precognitive' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
             'signed' => \App\Http\Middleware\ValidateSignature::class,
             'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-            'locale' => \App\Http\Middleware\ApiLanguage::class,
-            'isActive' => \App\Http\Middleware\IsActive::class,
+            'locale' => ApiLanguage::class,
+            'isActive' => IsActive::class,
         ]);
 
 

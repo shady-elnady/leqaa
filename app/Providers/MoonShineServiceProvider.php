@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Language;
 use App\Models\Locale;
 use App\MoonShine\Resources\AddressResource;
+use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\CityResource;
 use App\MoonShine\Resources\CollegeResource;
 use App\MoonShine\Resources\CountryResource;
@@ -19,6 +21,7 @@ use App\MoonShine\Resources\GovernorateResource;
 use App\MoonShine\Resources\InterestResource;
 use App\MoonShine\Resources\LanguageResource;
 use App\MoonShine\Resources\LecturerResource;
+use App\MoonShine\Resources\LecturerTransactionResource;
 use App\MoonShine\Resources\LocaleResource;
 use App\MoonShine\Resources\LocalityResource;
 use App\MoonShine\Resources\OrganizationResource;
@@ -29,6 +32,7 @@ use App\MoonShine\Resources\ReservationResource;
 use App\MoonShine\Resources\StateResource;
 use App\MoonShine\Resources\StreetResource;
 use App\MoonShine\Resources\StudentResource;
+use App\MoonShine\Resources\StudentTransactionResource;
 use App\MoonShine\Resources\TransactionResource;
 use App\MoonShine\Resources\UniversityResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
@@ -51,8 +55,10 @@ use Modules\A00Contact\Models\Street;
 use Modules\B00User\Models\Interest;
 use Modules\B00User\Models\Lecturer;
 use Modules\B00User\Models\Student;
+use Modules\C00Payment\Models\LecturerTransaction;
 use Modules\C00Payment\Models\PaymentMethod;
 use Modules\C00Payment\Models\PaymentStatus;
+use Modules\C00Payment\Models\StudentTransaction;
 use Modules\C00Payment\Models\Transaction;
 use Modules\D00Organization\Models\College;
 use Modules\D00Organization\Models\Organization;
@@ -88,17 +94,6 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     protected function menu(): array
     {
         return [
-            MenuGroup::make(static fn() => __('moonshine::ui.resource.system'), [
-                MenuItem::make(
-                    static fn() => __('moonshine::ui.resource.admins_title'),
-                    new MoonShineUserResource()
-                ),
-                MenuItem::make(
-                    static fn() => __('moonshine::ui.resource.role_title'),
-                    new MoonShineUserRoleResource()
-                ),
-            ]),
-
             // MenuItem::make('Documentation', 'https://moonshine-laravel.com/docs')
             //     ->badge(fn() => 'Check')
             //     ->blank(),
@@ -128,6 +123,10 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 MenuItem::make('Currencies', new CurrencyResource(), 'heroicons.outline.users')
                     ->blank(fn() => false)
                     ->badge(fn() => Currency::count()),
+                MenuDivider::make(),
+                MenuItem::make('Categpries', new CategoryResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Category::count()),
             ]),
 
             MenuGroup::make('Contact', [
@@ -151,17 +150,13 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     ->blank(fn() => false)
                     ->badge(fn() => State::count()),
                 MenuDivider::make(),
-                MenuDivider::make(),
                 MenuItem::make('Streets', new StreetResource(), 'heroicons.outline.users')
                     ->blank(fn() => false)
                     ->badge(fn() => Street::count()),
                 MenuDivider::make(),
-                MenuDivider::make(),
                 MenuItem::make('Address', new AddressResource(), 'heroicons.outline.users')
                     ->blank(fn() => false)
                     ->badge(fn() => Address::count()),
-                MenuDivider::make(),
-
             ]),
 
             MenuGroup::make('Users', [
@@ -187,9 +182,13 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     ->blank(fn() => false)
                     ->badge(fn() => PaymentStatus::count()),
                 MenuDivider::make(),
-                MenuItem::make('Transactions', new TransactionResource(), 'heroicons.outline.users')
+                MenuItem::make('Lecturer Transactions', new LecturerTransactionResource(), 'heroicons.outline.users')
                     ->blank(fn() => false)
-                    ->badge(fn() => Transaction::count()),
+                    ->badge(fn() => LecturerTransaction::count()),
+                MenuDivider::make(),
+                MenuItem::make('Student Transactions', new StudentTransactionResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => StudentTransaction::count()),
             ]),
 
             MenuGroup::make('Organizations', [
@@ -228,8 +227,6 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 MenuItem::make('Reservations', new ReservationResource(), 'heroicons.outline.users')
                     ->blank(fn() => false)
                     ->badge(fn() => Reservation::count()),
-                MenuDivider::make(),
-
             ]),
 
         ];

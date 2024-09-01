@@ -26,7 +26,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::middleware('isActive')->group(function () {
         Route::apiResource('/admins', AdminController::class);
         Route::apiResource('/lecturers', LecturerController::class);
-        Route::apiResource('/lecturers', StudentController::class);
-        Route::apiResource('/lecturers', InterestController::class);
+        Route::apiResource('/students', StudentController::class);
+        Route::apiResource('/interests', InterestController::class);
     });
 });

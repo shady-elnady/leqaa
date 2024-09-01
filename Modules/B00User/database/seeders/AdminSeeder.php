@@ -40,6 +40,5 @@ class AdminSeeder extends Seeder
                 'is_graduate' => true,
             ]
         );
-        // Admin::factory()->count(4)->create();
     }
 }

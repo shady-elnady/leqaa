@@ -30,14 +30,4 @@ class EventPhoto extends BaseModel
     {
         return $this->belongsTo(Event::class, 'event_id');
     }
-
-    public function getEventTitleAttribute(): BelongsTo
-    {
-        return $this->event?->title ?? null;
-    }
-
-    // protected static function newFactory(): EventPhotoFactory
-    // {
-    //     //return EventPhotoFactory::new();
-    // }
 }

@@ -6,6 +6,7 @@ use App\Enums\GendersEnum;
 use App\Enums\TitlesEnum;
 use Core\Requests\BaseApiFormRequest;
 use Illuminate\Validation\Rule;
+use Modules\B00User\Models\Lecturer;
 
 class LecturerRequest extends BaseApiFormRequest
 {
@@ -19,7 +20,8 @@ class LecturerRequest extends BaseApiFormRequest
             'name' => ['string', 'unique:App\Models\User,name'],
             'avatar' => ['nullable', 'extensions:jpg,png', 'mimes:jpg,bmp,png'],
             'gender' => ['nullable', Rule::enum(GendersEnum::class)],
-            'email' => ['unique:App\Models\User,email'],
+            'email' => ['required', 'email', Rule::unique(Lecturer::class, 'email')->ignore($this->route()->lecturer->id)],
+            // 'email' => ['unique:App\Models\User,email'],
             'mobile' => ['string', 'unique:App\Models\User,mobile'],
             'password' => ['string', 'unique:App\Models\User,name'],
             'is_active' => ['nullable', 'boolean'],

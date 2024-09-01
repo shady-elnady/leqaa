@@ -44,7 +44,6 @@ class BaseUserModel extends Model implements
     protected $fillable = [
         'name',
         'avatar',
-        'complete_name',
         'email',
         'mobile',
         'password',

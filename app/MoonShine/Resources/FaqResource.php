@@ -38,7 +38,7 @@ class FaqResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
             Text::make('Name')->nullable(),
             Text::make('Country Code'),
             Text::make('Tel Code'),
@@ -59,7 +59,7 @@ class FaqResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
             Text::make('Country Code'),
             Text::make('Tel Code'),
             Text::make('Mobile Number Length'),
@@ -94,7 +94,7 @@ class FaqResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
             Text::make('Name')->nullable(),
             Text::make('Country Code'),
             Text::make('Tel Code'),

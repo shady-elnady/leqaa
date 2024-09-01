@@ -51,7 +51,6 @@ class BaseMigration extends Migration
         $table->enum('title', TitlesEnum::getValues())->nullable();
         $table->string('name')->nullable()->unique();
         $table->string('avatar')->nullable();
-        $table->string('complete_name')->nullable();
         $table->enum('gender', GendersEnum::getValues())->nullable();
         $table->string('email')->unique();
         $table->string('mobile')->unique();

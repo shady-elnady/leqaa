@@ -11,9 +11,14 @@ return new class extends BasePaymentMigration
      */
     public function up(): void
     {
-        Schema::create("{$this->base_dir}_transactions", function (Blueprint $table) {
+        Schema::create("{$this->base_dir}_student_transactions", function (Blueprint $table) {
             $this->defaultColumns($table);
-            $table->morphs('transactor');
+            //
+            $table->unsignedBigInteger("student_id");
+            $table->foreign('student_id')->references('id')->on("{$this->user_module_dir}_students");
+            //
+            $table->unsignedBigInteger("reservation_id");
+            $table->foreign('reservation_id')->references('id')->on("{$this->reservation_module_dir}_reservations");
             //
             $table->unsignedBigInteger("payment_status_id");
             $table->foreign('payment_status_id')->references('id')->on("{$this->base_dir}_payment_statuses");
@@ -45,6 +50,6 @@ return new class extends BasePaymentMigration
      */
     public function down(): void
     {
-        Schema::dropIfExists("{$this->base_dir}_transactions");
+        Schema::dropIfExists("{$this->base_dir}_student_transactions");
     }
 };

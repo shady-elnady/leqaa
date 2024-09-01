@@ -32,7 +32,7 @@ return new class extends BaseEventMigration
             $table->unsignedBigInteger('lecturer_id')->nullable();
             $table->foreign('lecturer_id')->references('id')->on("{$this->user_module_dir}_lecturers");
             //
-            $table->double('lecturer_Financial_dues')->nullable();
+            $table->double('lecturer_financial_dues')->nullable();
             $table->enum('lecturer_financial_system', LecturerFinancialSystemEnum::getValues());
             $table->foreignId('event_type_id')->constrained("{$this->base_dir}_event_types");
             //

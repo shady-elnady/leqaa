@@ -22,6 +22,7 @@ class University extends BaseModel
      */
     protected $fillable = [
         'logo',
+        'email',
         'translations',
     ];
 }

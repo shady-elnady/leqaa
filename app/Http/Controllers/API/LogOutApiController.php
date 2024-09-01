@@ -11,10 +11,7 @@ class LogOutApiController extends BaseApiController
     {
         auth()->user()->currentAccessToken()->delete();
         // auth()->user()->tokens()->delete();
-
-        // Auth::guard('web')->logout();
-
-
+        Auth::guard('web')->logout();
         return $this->jsonResponse(
             message: __('auth.logged_out')
         );

@@ -16,28 +16,6 @@ class Admin extends BaseUserModel
         $this->table = "{$this->base_dir}_admins";
     }
 
-    // /**
-    //  * The attributes that are mass assignable.
-    //  */
-    // protected $fillable = [
-    //     'first_name',
-    //     'last_name',
-    //     'username',
-    //     'email',
-    //     'mobile',
-    //     'password',
-    //     'avatar',
-    //     'is_active',
-    //     'is_blocked',
-    //     'gender',
-    //     'email_verified_at',
-    //     'mobile_verified_at',
-    //     'last_login',
-    //     'contact_info',
-    //     'remember_token',
-    // ];
-
-
     protected static function newFactory(): AdminFactory
     {
         return AdminFactory::new();

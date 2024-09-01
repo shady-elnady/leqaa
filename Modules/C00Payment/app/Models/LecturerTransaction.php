@@ -2,31 +2,31 @@
 
 namespace Modules\C00Payment\Models;
 
-use App\Models\Currency;
-use App\Models\User;
 use Core\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Currency;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Modules\C00Payment\Database\Factories\TransactionFactory;
+use Modules\B00User\Models\Lecturer;
 use Modules\C00Payment\Enums\FinancialMovementTypesEnum;
+use Modules\E00Event\Models\Event;
 
-class Transaction extends BaseModel
+class LecturerTransaction extends BaseModel
 {
     use HasFactory;
 
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->table = "{$this->base_dir}_transactions";
+        $this->table = "{$this->base_dir}_lecturer_transactions";
     }
 
     /**
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'transactor_type',
-        'transactor_id',
+        'lecturer_id',
+        'event_id',
         'payment_status_id',
         'amount',
         'total_required_amount',
@@ -46,15 +46,15 @@ class Transaction extends BaseModel
         'financial_transaction_type' => FinancialMovementTypesEnum::class,
     ];
 
-    public function transactor()
+    public function lecturer(): BelongsTo
     {
-        return $this->morphTo();
+        return $this->belongsTo(Lecturer::class, 'lecturer_id');
     }
 
-    // public function user(): BelongsTo
-    // {
-    //     return $this->belongsTo(User::class, 'user_id');
-    // }
+    public function event(): BelongsTo
+    {
+        return $this->belongsTo(Event::class, 'event_id');
+    }
 
     public function paymentStatus(): BelongsTo
     {
@@ -70,14 +70,4 @@ class Transaction extends BaseModel
     {
         return $this->belongsTo(Currency::class, 'currency_id');
     }
-
-    // public function transactions(): HasMany
-    // {
-    //     return $this->hasMany(Transaction::class);
-    // }
-
-    // protected static function newFactory(): TransactionFactory
-    // {
-    //     //return TransactionFactory::new();
-    // }
 }

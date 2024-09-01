@@ -32,7 +32,7 @@ class EventPhotoResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
             Text::make('Event name', 'event_title')->nullable(),
             BelongsTo::make('Event', 'event', 'title', resource: new EventResource()),
             Number::make('Order')->default(1),
@@ -46,8 +46,7 @@ class EventPhotoResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
-            Text::make('Event name', 'event_title')->nullable(),
+            Image::make('Image')->dir($this->title),
             BelongsTo::make('Event', 'event', 'title', resource: new EventResource()),
             Number::make('Order')->default(1),
         ];
@@ -60,7 +59,8 @@ class EventPhotoResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
+            Text::make('Event name', 'event_title')->nullable(),
             BelongsTo::make('Event', 'event', 'title', resource: new EventResource()),
             Number::make('Order')->default(1),
         ];

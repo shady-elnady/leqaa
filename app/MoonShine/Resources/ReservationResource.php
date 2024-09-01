@@ -39,10 +39,8 @@ class ReservationResource extends ModelResource
                 ->min(0)
                 ->max(10)
                 ->default(0),
-            TextArea::make('Comment')->nullable(),
-            TextArea::make('canceled_reason', 'canceled_reason')->nullable(),
             BelongsTo::make('Event', 'event', 'title', resource: new EventResource()),
-            BelongsTo::make('Student', 'student', 'native_name', resource: new StudentResource()),
+            BelongsTo::make('Student', 'student', 'name', resource: new StudentResource()),
             Enum::make('Reservation Status', 'reservation_status')
                 ->attach(ReservationStatusEnum::class),
         ];
@@ -56,6 +54,7 @@ class ReservationResource extends ModelResource
         return [
             ID::make()->sortable(),
             Number::make('Rating')
+                ->hint('From 0 to 10')
                 ->stars()
                 ->min(0)
                 ->max(10)
@@ -63,7 +62,7 @@ class ReservationResource extends ModelResource
             TextArea::make('Comment')->nullable(),
             TextArea::make('canceled_reason', 'canceled_reason')->nullable(),
             BelongsTo::make('Event', 'event', 'title', resource: new EventResource()),
-            BelongsTo::make('Student', 'student', 'native_name', resource: new StudentResource()),
+            BelongsTo::make('Student', 'student', 'name', resource: new StudentResource()),
             Enum::make('Reservation Status', 'reservation_status')
                 ->attach(ReservationStatusEnum::class),
         ];
@@ -77,6 +76,7 @@ class ReservationResource extends ModelResource
         return [
             ID::make()->sortable(),
             Number::make('Rating')
+                ->hint('From 0 to 10')
                 ->stars()
                 ->min(0)
                 ->max(10)

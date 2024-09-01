@@ -48,7 +48,6 @@ class PaymentStatusResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name')->nullable(),
             Enum::make('Payment Status')
                 ->attach(PaymentStatusEnum::class),
             Block::make(

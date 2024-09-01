@@ -11,6 +11,8 @@ use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Fields\Text;
+use MoonShine\Fields\Number;
+use MoonShine\Fields\TextArea;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Enum;
 use MoonShine\Fields\Image;
@@ -18,7 +20,9 @@ use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Components\MoonShineComponent;
 use Modules\E00Event\Enums\EventPaidStatusEnum;
 use Modules\E00Event\Enums\EventStatusEnum;
+use Modules\E00Event\Enums\LecturerFinancialSystemEnum;
 use MoonShine\Fields\Relationships\HasMany;
+use MoonShine\ActionButtons\ActionButton;
 
 /**
  * @extends ModelResource<Event>
@@ -37,12 +41,34 @@ class EventResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Title'),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
             Text::make('Hall'),
             BelongsTo::make('Event Type', 'eventType', 'name', resource: new EventTypeResource())
                 ->placeholder('Event Type')
                 ->searchable()
                 ->creatable(),
+            BelongsTo::make('Category', 'category', 'name', resource: new CategoryResource())
+                ->placeholder('Category')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('Lecturer', 'lecturer', 'name', resource: new LecturerResource())
+                ->placeholder('Lecturer')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('University', 'university', 'name', resource: new UniversityResource())
+                ->placeholder('University')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('College', 'college', 'name', resource: new CollegeResource())
+                ->placeholder('College')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('Organizer', 'organizer', 'name', resource: new OrganizationResource())
+                ->placeholder('Organizer')
+                ->searchable()
+                ->creatable(),
+            Number::make('Lecturer Financial Dues', 'lecturer_Financial_dues')->nullable(),
+            Enum::make('Lecturer Financial System', 'lecturer_financial_system')->attach(LecturerFinancialSystemEnum::class),
             Enum::make('Event Paid Status', 'event_paid_status')->attach(EventPaidStatusEnum::class),
             Enum::make('Event Status', 'event_status')->attach(EventStatusEnum::class),
             Date::make('Start Date', 'start_date_time')->nullable()->withTime(),
@@ -57,15 +83,44 @@ class EventResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Title'),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
             Text::make('Hall'),
             BelongsTo::make('Event Type', 'eventType', 'name', resource: new EventTypeResource())
                 ->placeholder('Event Type')
                 ->searchable()
                 ->creatable(),
+            BelongsTo::make('Category', 'category', 'name', resource: new CategoryResource())
+                ->placeholder('Category')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('Lecturer', 'lecturer', 'name', resource: new LecturerResource())
+                ->placeholder('Lecturer')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('University', 'university', 'name', resource: new UniversityResource())
+                ->placeholder('University')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('College', 'college', 'name', resource: new CollegeResource())
+                ->placeholder('College')
+                ->customAttributes([
+                    'data-search-result-limit' => 5
+                ])
+                ->creatable(
+                    button: ActionButton::make('New', '#')
+                        ->success()
+                        ->showInLine(),
+                ),
+            BelongsTo::make('Organizer', 'organizer', 'name', resource: new OrganizationResource())
+                ->placeholder('Organizer')
+                ->searchable()
+                ->creatable(),
+            TextArea::make('Description'),
+            Number::make('Lecturer Financial Dues', 'lecturer_Financial_dues')->nullable(),
+            Enum::make('Lecturer Financial System', 'lecturer_financial_system')->attach(LecturerFinancialSystemEnum::class),
             Enum::make('Event Paid Status', 'event_paid_status')->attach(EventPaidStatusEnum::class),
             Enum::make('Event Status', 'event_status')->attach(EventStatusEnum::class),
-
+            Date::make('Start Date', 'start_date_time')->nullable()->withTime(),
         ];
     }
 
@@ -77,19 +132,38 @@ class EventResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Title'),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
             Text::make('Hall'),
             BelongsTo::make('Event Type', 'eventType', 'name', resource: new EventTypeResource())
                 ->placeholder('Event Type')
                 ->searchable()
                 ->creatable(),
+            BelongsTo::make('Category', 'category', 'name', resource: new CategoryResource())
+                ->placeholder('Category')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('Lecturer', 'lecturer', 'name', resource: new LecturerResource())
+                ->placeholder('Lecturer')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('University', 'university', 'name', resource: new UniversityResource())
+                ->placeholder('University')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('College', 'college', 'name', resource: new CollegeResource())
+                ->placeholder('College')
+                ->searchable()
+                ->creatable(),
+            BelongsTo::make('Organizer', 'organizer', 'name', resource: new OrganizationResource())
+                ->placeholder('Organizer')
+                ->searchable()
+                ->creatable(),
+            TextArea::make('Description'),
+            Number::make('Lecturer Financial Dues', 'lecturer_Financial_dues')->nullable(),
+            Enum::make('Lecturer Financial System', 'lecturer_financial_system')->attach(LecturerFinancialSystemEnum::class),
             Enum::make('Event Paid Status', 'event_paid_status')->attach(EventPaidStatusEnum::class),
             Enum::make('Event Status', 'event_status')->attach(EventStatusEnum::class),
-            HasMany::make('Photos', 'eventPhotos', resource: new EventPhotoResource())
-                ->fields([
-                    Image::make('Image'),
-                ])
-                ->creatable(),
+            Date::make('Start Date', 'start_date_time')->nullable()->withTime(),
         ];
     }
 

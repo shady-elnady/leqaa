@@ -15,6 +15,7 @@ class UniversitySeeder extends Seeder
         $organizations = [
             [
                 'logo' => '',
+                'email' => 'http:elmansorajojnffnfj.google',
                 'translations' => [
                     'ar_AS' => 'جامعه المنصوره',
                     'ar_EG' => 'جامعه المنصوره',

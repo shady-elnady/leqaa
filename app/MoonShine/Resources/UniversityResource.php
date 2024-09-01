@@ -15,6 +15,7 @@ use Modules\D00Organization\Models\University;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Json;
 use MoonShine\Fields\Text;
+use MoonShine\Fields\Email;
 use MoonShine\Fields\Select;
 use MoonShine\ActionButtons\ActionButton;
 
@@ -35,6 +36,7 @@ class UniversityResource extends ModelResource
         return [
             ID::make()->sortable(),
             Image::make('logo'),
+            Email::make('Email', 'email'),
             Text::make('Name')->nullable(),
         ];
     }
@@ -47,6 +49,7 @@ class UniversityResource extends ModelResource
         return [
             ID::make()->sortable(),
             Image::make('logo'),
+            Email::make('Email', 'email'),
             Block::make(
                 'Translations',
                 [
@@ -73,6 +76,7 @@ class UniversityResource extends ModelResource
         return [
             ID::make()->sortable(),
             Image::make('logo'),
+            Email::make('Email', 'email'),
             Text::make('Name')->nullable(),
             Block::make(
                 'Translations',

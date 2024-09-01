@@ -35,7 +35,7 @@ class EventTypeResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Name')->nullable(),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
             Text::make('Name'),
         ];
     }
@@ -48,7 +48,7 @@ class EventTypeResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
             Block::make(
                 'Translations',
                 [
@@ -75,7 +75,7 @@ class EventTypeResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('name')->nullable(),
-            Image::make('Image'),
+            Image::make('Image')->dir($this->title),
             Block::make(
                 'Translations',
                 [

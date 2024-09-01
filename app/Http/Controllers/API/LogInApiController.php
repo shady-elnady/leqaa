@@ -56,6 +56,14 @@ class LogInApiController extends BaseApiController
             );
         }
 
+        if (!$user->is_active) {
+            return $this->sendJsonResponse(
+                message: __('auth.inactive'),
+                success: false,
+                statusCode: 401,
+            );
+        }
+
         if (!$user->password || !Hash::check($request->password, $user->password)) {
             return $this->sendJsonResponse(
                 message: __('auth.failed'),
@@ -74,27 +82,3 @@ class LogInApiController extends BaseApiController
         );
     }
 }
- /*
- /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        auth()->guard('student')->logout(); // Log out a regular user
-        auth()->guard('admin')->logout(); // Log out an administrator
-        ////////// Route File
-        Route::middleware(['auth:student'])->group(function () {
-            // Routes accessible to regular users
-        });
-
-        Route::middleware(['auth:admin'])->group(function () {
-            // Routes accessible to administrators
-        });
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
-            $success['token'] =  $user->createToken($validatedData['mobile'])->plainTextToken;
-            $success['name'] =  $user->name;
-
-            return $this->sendResponse($success, 'User login successfully.');
-        } else {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
-        }
- */

@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\B00User\Models\Lecturer;
+use Modules\D00Organization\Models\College;
 use Modules\D00Organization\Models\Organization;
+use Modules\D00Organization\Models\University;
 use Modules\E00Event\Enums\EventPaidStatusEnum;
 use Modules\E00Event\Enums\EventStatusEnum;
 use Modules\E00Event\Enums\LecturerFinancialSystemEnum;
@@ -50,12 +52,22 @@ class Event extends BaseModel
         'event_status' => EventStatusEnum::class,
     ];
 
+    public function university(): BelongsTo
+    {
+        return $this->belongsTo(University::class, 'university_id');
+    }
+
+    public function college(): BelongsTo
+    {
+        return $this->belongsTo(College::class, 'college_id');
+    }
+
     public function organizer(): BelongsTo
     {
         return $this->belongsTo(Organization::class, 'organizer_id');
     }
 
-    public function Lecturer(): BelongsTo
+    public function lecturer(): BelongsTo
     {
         return $this->belongsTo(Lecturer::class, 'Lecturer_id');
     }

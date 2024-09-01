@@ -51,7 +51,6 @@ class PaymentMethodResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name')->nullable(),
             Enum::make('Payment Method')
                 ->attach(PaymentMethodsEnum::class),
             Block::make(

@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Modules\C00Payment\Interfaces\PaymentMethodRepositoryInterface;
 use Modules\C00Payment\Interfaces\PaymentStatusRepositoryInterface;
-use Modules\C00Payment\Interfaces\TransactionRepositoryInterface;
+use Modules\C00Payment\Interfaces\LecturerTransactionRepositoryInterface;
+use Modules\C00Payment\Interfaces\StudentTransactionRepositoryInterface;
 use Modules\C00Payment\Repositories\PaymentMethodRepository;
 use Modules\C00Payment\Repositories\PaymentStatusRepository;
-use Modules\C00Payment\Repositories\TransactionRepository;
+use Modules\C00Payment\Repositories\LecturerTransactionRepository;
+use Modules\C00Payment\Repositories\StudentTransactionRepository;
 
 class C00PaymentServiceProvider extends ServiceProvider
 {
@@ -40,7 +42,8 @@ class C00PaymentServiceProvider extends ServiceProvider
         //
         $this->app->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
         $this->app->bind(PaymentStatusRepositoryInterface::class, PaymentStatusRepository::class);
-        $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
+        $this->app->bind(LecturerTransactionRepositoryInterface::class, LecturerTransactionRepository::class);
+        $this->app->bind(StudentTransactionRepositoryInterface::class, StudentTransactionRepository::class);
     }
 
     /**

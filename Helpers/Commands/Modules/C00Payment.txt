@@ -2,3 +2,5 @@ php artisan module:make C00Payment
 
 Generate Models  :
     php artisan module:make-model Transaction C00Payment -mcsfr --fillable=user_id,amount,payment_method,financial_movement_type,currency_id
+    php artisan module:make-model LecturerTransaction C00Payment -mcsfr --fillable=lecturer_id,amount,payment_method,financial_movement_type,currency_id
+    php artisan module:make-model StudentTransaction C00Payment -mcsfr --fillable=student_id,amount,payment_method,financial_movement_type,currency_id

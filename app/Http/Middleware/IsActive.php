@@ -19,13 +19,13 @@ class IsActive
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // if (!auth()->user()->is_active) {
-        //     return $this->jsonResponse(
-        //         message: __('auth.inactive'),
-        //         success: false,
-        //         status: 401
-        //     );
-        // }
+        if (!auth()->user()->is_active) {
+            return $this->sendJsonResponse(
+                message: __('auth.inactive'),
+                success: false,
+                statusCode: 401,
+            );
+        }
 
         return $next($request);
     }

@@ -5,29 +5,25 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\C00Payment\Models\LecturerTransaction;
 use MoonShine\Resources\ModelResource;
-use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
-use MoonShine\Components\MoonShineComponent;
-use Modules\B00User\Models\Lecturer;
-use Modules\B00User\Models\Student;
-use Modules\C00Payment\Models\Transaction;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Number;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\TextArea;
 use MoonShine\Fields\Relationships\BelongsTo;
-use MoonShine\Fields\Relationships\MorphTo;
+use MoonShine\Components\MoonShineComponent;
 
 /**
- * @extends ModelResource<Transaction>
+ * @extends ModelResource<LecturerTransaction>
  */
-class TransactionResource extends ModelResource
+class LecturerTransactionResource extends ModelResource
 {
-    protected string $model = Transaction::class;
+    protected string $model = LecturerTransaction::class;
 
-    protected string $title = 'Transactions';
+    protected string $title = 'LecturerTransactions';
 
     /**
      * @return list<Field>
@@ -36,12 +32,10 @@ class TransactionResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            MorphTo::make('transactor')->types([
-                Lecturer::class => 'username',
-                Student::class => 'username',
-            ]),
-            BelongsTo::make('Payment Status', 'payment_status', 'name', resource: new PaymentStatusResource()),
-            BelongsTo::make('Payment Method', 'payment_method', 'name', resource: new PaymentMethodResource()),
+            BelongsTo::make('Lecturer', 'lecturer', 'name', resource: new LecturerResource()),
+            BelongsTo::make('Event', 'event', 'title', resource: new EventResource()),
+            BelongsTo::make('Payment Status', 'paymentStatus', 'name', resource: new PaymentStatusResource()),
+            BelongsTo::make('Payment Method', 'paymentMethod', 'name', resource: new PaymentMethodResource()),
             BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
             Number::make('Amount'),
             Number::make('Required Amount', 'total_required_amount'),
@@ -62,12 +56,10 @@ class TransactionResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            MorphTo::make('transactor')->types([
-                Lecturer::class => 'username',
-                Student::class => 'username',
-            ]),
-            BelongsTo::make('Payment Status', 'payment_status', 'name', resource: new PaymentStatusResource()),
-            BelongsTo::make('Payment Method', 'payment_method', 'name', resource: new PaymentMethodResource()),
+            BelongsTo::make('Lecturer', 'lecturer', 'name', resource: new LecturerResource()),
+            BelongsTo::make('Event', 'event', 'title', resource: new EventResource()),
+            BelongsTo::make('Payment Status', 'paymentStatus', 'name', resource: new PaymentStatusResource()),
+            BelongsTo::make('Payment Method', 'paymentMethod', 'name', resource: new PaymentMethodResource()),
             BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
             Number::make('Amount'),
             Number::make('Required Amount', 'total_required_amount'),
@@ -88,12 +80,10 @@ class TransactionResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            MorphTo::make('transactor')->types([
-                Lecturer::class => 'username',
-                Student::class => 'username',
-            ]),
-            BelongsTo::make('Payment Status', 'payment_status', 'name', resource: new PaymentStatusResource()),
-            BelongsTo::make('Payment Method', 'payment_method', 'name', resource: new PaymentMethodResource()),
+            BelongsTo::make('Lecturer', 'lecturer', 'name', resource: new LecturerResource()),
+            BelongsTo::make('Event', 'event', 'title', resource: new EventResource()),
+            BelongsTo::make('Payment Status', 'paymentStatus', 'name', resource: new PaymentStatusResource()),
+            BelongsTo::make('Payment Method', 'paymentMethod', 'name', resource: new PaymentMethodResource()),
             BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
             Number::make('Amount'),
             Number::make('Required Amount', 'total_required_amount'),
@@ -107,9 +97,8 @@ class TransactionResource extends ModelResource
         ];
     }
 
-
     /**
-     * @param Transaction $item
+     * @param LecturerTransaction $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

@@ -1,0 +1,42 @@
+<?php
+
+return [
+    'unhandled' => 'Unhandled',
+    'in_progress' => 'In Progress',
+    'ordered' => 'Ordered',
+    'confirmed' => 'Confirmed',
+    'processing' => 'Processing',
+    'shipped' => 'Shipped',
+    'delivered' => 'Delivered',
+    'cancelled' => 'Cancelled',
+    'refunded' => 'Refunded',
+    'unknown' => 'Unknown',
+    'trips' => [
+        'new_trip' => 'New',
+        'offers_sent' => 'New',
+        'driver_assigned' => 'In progress',
+        'driver_arrived' => 'In progress',
+        'driver_en_route' => 'In progress',
+        'on_trip' => 'In progress',
+        'completed' => 'Completed',
+        'paid' => 'Completed',
+        'rated' => 'Completed',
+        'cancelled_by_user' => 'Cancelled',
+        'cancelled_by_driver' => 'Cancelled',
+        'no_show' => 'Cancelled',
+        'system_cancelled' => 'Cancelled',
+    ],
+    'deliveries' => [
+        'new_order' => 'New',
+        'offers_sent' => 'New',
+        'driver_assigned' => 'In progress',
+        'driver_arrived' => 'In progress',
+        'driver_en_route' => 'In progress',
+        'item_picked_up' => 'In progress',
+        'on_delivery' => 'In progress',
+        'delivered' => 'Completed',
+        'paid' => 'Completed',
+        'rated' => 'Completed',
+        'cancelled_by_user' => 'Cancelled',
+    ]
+];

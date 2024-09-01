@@ -8,12 +8,14 @@ use App\Http\Controllers\Api\RegisterApiController;
 use App\Http\Controllers\Api\ResetPasswordController;
 use App\Http\Controllers\Api\VerifyPasswordController;
 use App\Http\Controllers\Common\VerificationController;
+use App\Http\Middleware\IsActive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::post('login', LogInApiController::class);
 Route::post('register', RegisterApiController::class);
+
+Route::post('login', LogInApiController::class);
 
 Route::prefix('password')->group(function () {
     Route::post('forget', ForgetPasswordController::class);
@@ -21,10 +23,8 @@ Route::prefix('password')->group(function () {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::middleware('isActive')->group(function () {
+    Route::middleware([IsActive::class])->group(function () {
         Route::post('logout', LogOutApiController::class);
-
-        // Route::get('search', SearchController::class);
 
         // Route::post('upload', [MediaController::class, 'upload']);
 
