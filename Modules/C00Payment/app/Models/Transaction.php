@@ -25,7 +25,8 @@ class Transaction extends BaseModel
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'user_id',
+        'transactor_type',
+        'transactor_id',
         'payment_status_id',
         'amount',
         'total_required_amount',
@@ -45,10 +46,15 @@ class Transaction extends BaseModel
         'financial_transaction_type' => FinancialMovementTypesEnum::class,
     ];
 
-    public function user(): BelongsTo
+    public function transactor()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->morphTo();
     }
+
+    // public function user(): BelongsTo
+    // {
+    //     return $this->belongsTo(User::class, 'user_id');
+    // }
 
     public function paymentStatus(): BelongsTo
     {

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Language;
 use App\Models\Locale;
 use MoonShine\Resources\ModelResource;
+use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Switcher;
@@ -121,51 +122,24 @@ class LanguageResource extends ModelResource
             Text::make('Language Iso Code', 'language_iso_code'),
             Switcher::make('is Bidirectional', 'is_bidirectional'),
             // dd($this->item->translation),
-            Json::make('Translations', 'translations')->keyValue('Locale', 'Translation'),
+            Block::make(
+                'Translations',
+                [
+                    Json::make('Translations', 'translations')->keyValue('Locale', 'Translation'),
+                ]
+            ),
         ];
     }
 
-
-    // /**
-    //  * @return list<MoonShineComponent|Field>
-    //  */
-    // public function fields(): array
+    // public function prepareForValidation(): void
     // {
-    //     return [
-    //         Block::make([
-    //             ID::make()->sortable(),
-    //             Text::make('Native Name', 'native_name'),
-    //             Text::make('Language Iso Code', 'language_iso_code'),
-    //             Switcher::make('is Bidirectional', 'is_bidirectional'),
-    //             Json::make('Translations', 'translations'),
-    //             // ->asRelation(new LocaleResource())
-    //             // ->fields([
-    //             //     Position::make(),
-    //             //     BelongsTo::make('Locale', 'locale', 'locale_code')
-    //             //         ->setColumn('locale_id')
-    //             //         ->searchable()
-    //             //         ->default(Locale::find(2))
-    //             //         ->placeholder('Locale')
-    //             //         ->withImage(column: 'image', disk: 'public', dir: 'countries'),
-    //             //     Text::make('Translation')->required(),
-    //             // ])->creatable(
-    //             //     limit: 5,
-    //             //     button: ActionButton::make('Add New Translation', '#')->success()->icon('heroicons.outline.plus')->customAttributes(['class' => 'btn-lg'])
-    //             // )->removable(),
-    //         ]),
-    //     ];
+    //     request()?->merge([
+    //         'email' => request()
+    //             ?->string('email')
+    //             ->lower()
+    //             ->value()
+    //     ]);
     // }
-
-    public function prepareForValidation(): void
-    {
-        dd(request()->translations);
-        request()?->merge([
-            'email' => request()
-                ?->string('email')
-                ->lower()
-                ->value()
-        ]);
-    }
 
     /**
      * @param Language $item

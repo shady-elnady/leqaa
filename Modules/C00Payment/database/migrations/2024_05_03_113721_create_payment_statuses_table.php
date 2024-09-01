@@ -16,7 +16,6 @@ return new class extends BasePaymentMigration
             $this->defaultColumns($table);
             $this->translationsColumn($table);
             $table->enum('payment_status', PaymentStatusEnum::getValues());
-            // $table->enum('payment_status', ['Paid', 'Pay later', 'Partially paid']);
         });
     }
 

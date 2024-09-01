@@ -92,6 +92,8 @@ return [
     ],
     'locales' => [
         'ar_AS',
+        'ar_EG',
+        'en_US',
         'en_US',
     ],
 

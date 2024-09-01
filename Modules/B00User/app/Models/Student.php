@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Modules\B00User\Database\Factories\StudentFactory;
+use Modules\C00Payment\Models\Transaction;
 use Modules\F00Reservation\Models\Reservation;
 use Modules\H00Chat\Models\Faq;
 
@@ -65,5 +66,10 @@ class Student extends BaseUserModel
     protected static function newFactory(): StudentFactory
     {
         return StudentFactory::new();
+    }
+
+    public function transactions()
+    {
+        return $this->morphMany(Transaction::class, 'transactor');
     }
 }

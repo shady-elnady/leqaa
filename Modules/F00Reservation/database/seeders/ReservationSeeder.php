@@ -19,7 +19,7 @@ class ReservationSeeder extends Seeder
                 'student_id' => 1,
                 'reservation_status' => ReservationStatusEnum::InitialzationReservations,
                 'canceled_reason' => null,
-                'rate' => 4.5,
+                'rating' => 4,
                 'comment' => 'comment',
             ],
 
@@ -31,7 +31,7 @@ class ReservationSeeder extends Seeder
                     'student_id' => $reservation['student_id'],
                     'reservation_status' => $reservation['reservation_status'],
                     'canceled_reason' => $reservation['canceled_reason'],
-                    'rate' => $reservation['rate'],
+                    'rating' => $reservation['rating'],
                     'comment' => $reservation['comment'],
                 ]
             );

@@ -28,7 +28,7 @@ class Reservation extends BaseModel
         'student_id',
         'reservation_status',
         'canceled_reason',
-        'rate',
+        'rating',
         'comment',
     ];
 

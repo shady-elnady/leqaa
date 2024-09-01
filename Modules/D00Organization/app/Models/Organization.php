@@ -30,9 +30,19 @@ class Organization extends BaseModel
         'translations',
     ];
 
+    public function organizationType(): BelongsTo
+    {
+        return $this->belongsTo(OrganizationType::class, 'organization_type_id');
+    }
+
     public function affiliatedTo(): BelongsTo // منتمي إلى
     {
         return $this->belongsTo(Organization::class, 'affiliated_to');
+    }
+
+    public function university(): BelongsTo
+    {
+        return $this->belongsTo(University::class, 'university_id');
     }
 
     public function events(): HasMany

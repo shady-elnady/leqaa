@@ -3,8 +3,6 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\C00Payment\Models\Base\BasePaymentMigration;
-use Modules\C00Payment\Enums\FinancialMovementTypesEnum;
-use Modules\C00Payment\Enums\PaymentMethodsEnum;
 
 return new class extends BasePaymentMigration
 {
@@ -15,12 +13,12 @@ return new class extends BasePaymentMigration
     {
         Schema::create("{$this->base_dir}_transactions", function (Blueprint $table) {
             $this->defaultColumns($table);
-            $table->foreignId('user_id')->constrained('users');
+            $table->morphs('transactor');
             //
             $table->unsignedBigInteger("payment_status_id");
             $table->foreign('payment_status_id')->references('id')->on("{$this->base_dir}_payment_statuses");
 
-            $table->double('amount')->default(0);
+            $table->double('amount');
 
             $table->double('total_required_amount');
             //
@@ -35,7 +33,7 @@ return new class extends BasePaymentMigration
             //        $table->date('account_period'); // فتره الحساب
             $table->date('due_date')->nullable(); // تاريخ الاستحقاق
             $table->integer('notified_days')->nullable(); // يخطر قبل ايام
-            $table->bigInteger('reference_number')->nullable();
+            $table->string('reference_number')->nullable();
             $table->date('bank_deposit_date')->nullable(); //تاريخ الإيداع البنكي
             $table->string('bank_name')->nullable();
             $table->text('comments')->nullable();

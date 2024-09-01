@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Currency;
 use App\Models\Locale;
 use MoonShine\Resources\ModelResource;
+use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Fields\Text;
@@ -33,8 +34,8 @@ class CurrencyResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Name')->nullable(),
-            Text::make('iso_code')->unique(),
-            Text::make('symbol')->nullable(),
+            Text::make('ISO Code', 'iso_code'),
+            Text::make('Symbol')->nullable(),
         ];
     }
 
@@ -45,19 +46,23 @@ class CurrencyResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('iso_code')->unique(),
-            Text::make('symbol')->nullable(),
-            Json::make('Translations', 'translations')->keyValue(
-                keyField: Select::make('Locale', 'locale')->options(Locale::select('locale_code')->get()->mapWithKeys(function (Locale $locale) {
-                    return [$locale->locale_language_name => $locale['locale_code']];
-                })->toArray()),
-                valueField: Text::make('Translation')->required(),
-            )
-                ->creatable(
-                    limit: 5,
-                    button: ActionButton::make('Add New Translation', '#')->success()->icon('heroicons.outline.plus')->customAttributes(['class' => 'btn-lg'])
-                )
-                ->removable(),
+            Text::make('ISO Code', 'iso_code'),
+            Text::make('Symbol')->nullable(),
+            Block::make(
+                'Translations',
+                [
+                    Json::make(null, 'translations')->keyValue(
+                        keyField: Select::make('Locale', 'locale')->options(Locale::select('locale_code')->get()->mapWithKeys(function (Locale $locale) {
+                            return [$locale['locale_code'] => $locale['locale_code']];
+                        })->toArray()),
+                        valueField: Text::make('Translation')->required(),
+                    )->creatable(
+                        limit: 5,
+                        button: ActionButton::make('Add New Translation', '#')->success()->icon('heroicons.outline.plus')->customAttributes(['class' => 'btn-lg']),
+                    )
+                        ->removable(),
+                ]
+            ),
         ];
     }
 
@@ -69,9 +74,14 @@ class CurrencyResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Name')->nullable(),
-            Text::make('iso_code')->unique(),
-            Text::make('symbol')->nullable(),
-            Json::make('Translations', 'translations')->keyValue('Locale', 'Translation'),
+            Text::make('ISO Code', 'iso_code'),
+            Text::make('Symbol')->nullable(),
+            Block::make(
+                'Translations',
+                [
+                    Json::make('Translations', 'translations')->keyValue('Locale', 'Translation'),
+                ]
+            ),
         ];
     }
 

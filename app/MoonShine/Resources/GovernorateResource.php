@@ -5,30 +5,27 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\A00Contact\Models\Country;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
 use App\Models\Locale;
-use Modules\A00Contact\Enums\ContinentsEnum;
-use MoonShine\Fields\Image;
+use Modules\A00Contact\Models\Governorate;
 use MoonShine\Fields\Json;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Select;
 use MoonShine\ActionButtons\ActionButton;
-use MoonShine\Fields\Enum;
 use MoonShine\Fields\Relationships\BelongsTo;
 
 /**
- * @extends ModelResource<Country>
+ * @extends ModelResource<Governorate>
  */
-class CountryResource extends ModelResource
+class GovernorateResource extends ModelResource
 {
-    protected string $model = Country::class;
+    protected string $model = Governorate::class;
 
-    protected string $title = 'Countries';
+    protected string $title = 'Governorates';
 
     /**
      * @return list<Field>
@@ -37,17 +34,9 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
             Text::make('Name')->nullable(),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            Text::make('Governorate Tel Code')->nullable(),
+            BelongsTo::make('Country', 'country', 'name', resource: new CountryResource()),
         ];
     }
 
@@ -58,16 +47,9 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            Text::make('Name')->nullable(),
+            Text::make('Governorate Tel Code')->nullable(),
+            BelongsTo::make('Country', 'country', 'name', resource: new CountryResource()),
             Block::make(
                 'Translations',
                 [
@@ -93,17 +75,9 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
             Text::make('Name')->nullable(),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            Text::make('Governorate Tel Code')->nullable(),
+            BelongsTo::make('Country', 'country', 'name', resource: new CountryResource()),
             Block::make(
                 'Translations',
                 [
@@ -113,8 +87,9 @@ class CountryResource extends ModelResource
         ];
     }
 
+
     /**
-     * @param Country $item
+     * @param Governorate $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

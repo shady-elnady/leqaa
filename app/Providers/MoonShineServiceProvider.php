@@ -4,13 +4,33 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Currency;
 use App\Models\Language;
 use App\Models\Locale;
+use App\MoonShine\Resources\AddressResource;
+use App\MoonShine\Resources\CityResource;
+use App\MoonShine\Resources\CollegeResource;
 use App\MoonShine\Resources\CountryResource;
+use App\MoonShine\Resources\CurrencyResource;
+use App\MoonShine\Resources\EventPhotoResource;
 use App\MoonShine\Resources\EventResource;
 use App\MoonShine\Resources\EventTypeResource;
+use App\MoonShine\Resources\GovernorateResource;
+use App\MoonShine\Resources\InterestResource;
 use App\MoonShine\Resources\LanguageResource;
+use App\MoonShine\Resources\LecturerResource;
 use App\MoonShine\Resources\LocaleResource;
+use App\MoonShine\Resources\LocalityResource;
+use App\MoonShine\Resources\OrganizationResource;
+use App\MoonShine\Resources\OrganizationTypeResource;
+use App\MoonShine\Resources\PaymentMethodResource;
+use App\MoonShine\Resources\PaymentStatusResource;
+use App\MoonShine\Resources\ReservationResource;
+use App\MoonShine\Resources\StateResource;
+use App\MoonShine\Resources\StreetResource;
+use App\MoonShine\Resources\StudentResource;
+use App\MoonShine\Resources\TransactionResource;
+use App\MoonShine\Resources\UniversityResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -21,9 +41,27 @@ use MoonShine\Contracts\Resources\ResourceContract;
 use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
 use Closure;
+use Modules\A00Contact\Models\Address;
+use Modules\A00Contact\Models\City;
 use Modules\A00Contact\Models\Country;
+use Modules\A00Contact\Models\Governorate;
+use Modules\A00Contact\Models\Locality;
+use Modules\A00Contact\Models\State;
+use Modules\A00Contact\Models\Street;
+use Modules\B00User\Models\Interest;
+use Modules\B00User\Models\Lecturer;
+use Modules\B00User\Models\Student;
+use Modules\C00Payment\Models\PaymentMethod;
+use Modules\C00Payment\Models\PaymentStatus;
+use Modules\C00Payment\Models\Transaction;
+use Modules\D00Organization\Models\College;
+use Modules\D00Organization\Models\Organization;
+use Modules\D00Organization\Models\OrganizationType;
+use Modules\D00Organization\Models\University;
 use Modules\E00Event\Models\Event;
+use Modules\E00Event\Models\EventPhoto;
 use Modules\E00Event\Models\EventType;
+use Modules\F00Reservation\Models\Reservation;
 use MoonShine\Menu\MenuDivider;
 
 class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
@@ -86,6 +124,10 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 MenuItem::make('Locales', new LocaleResource(), 'heroicons.outline.users')
                     ->blank(fn() => false)
                     ->badge(fn() => Locale::count()),
+                MenuDivider::make(),
+                MenuItem::make('Currencies', new CurrencyResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Currency::count()),
             ]),
 
             MenuGroup::make('Contact', [
@@ -93,7 +135,79 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     ->blank(fn() => false)
                     ->badge(fn() => Country::count()),
                 MenuDivider::make(),
+                MenuItem::make('Governorates', new GovernorateResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Governorate::count()),
+                MenuDivider::make(),
+                MenuItem::make('Cities', new CityResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => City::count()),
+                MenuDivider::make(),
+                MenuItem::make('Localities', new LocalityResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Locality::count()),
+                MenuDivider::make(),
+                MenuItem::make('States', new StateResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => State::count()),
+                MenuDivider::make(),
+                MenuDivider::make(),
+                MenuItem::make('Streets', new StreetResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Street::count()),
+                MenuDivider::make(),
+                MenuDivider::make(),
+                MenuItem::make('Address', new AddressResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Address::count()),
+                MenuDivider::make(),
 
+            ]),
+
+            MenuGroup::make('Users', [
+                MenuItem::make('Lecturers', new LecturerResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Lecturer::count()),
+                MenuDivider::make(),
+                MenuItem::make('Students', new StudentResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Student::count()),
+                MenuDivider::make(),
+                MenuItem::make('Interests', new InterestResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Interest::count()),
+            ]),
+
+            MenuGroup::make('Payments', [
+                MenuItem::make('Payment Methods', new PaymentMethodResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => PaymentMethod::count()),
+                MenuDivider::make(),
+                MenuItem::make('Payment Statuss', new PaymentStatusResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => PaymentStatus::count()),
+                MenuDivider::make(),
+                MenuItem::make('Transactions', new TransactionResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Transaction::count()),
+            ]),
+
+            MenuGroup::make('Organizations', [
+                MenuItem::make('Organization Types', new OrganizationTypeResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => OrganizationType::count()),
+                MenuDivider::make(),
+                MenuItem::make('Organizations', new OrganizationResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Organization::count()),
+                MenuDivider::make(),
+                MenuItem::make('Universities', new UniversityResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => University::count()),
+                MenuDivider::make(),
+                MenuItem::make('Colleges', new CollegeResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => College::count()),
             ]),
 
             MenuGroup::make('Events', [
@@ -104,7 +218,20 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 MenuItem::make('Events', new EventResource(), 'heroicons.outline.users')
                     ->blank(fn() => false)
                     ->badge(fn() => Event::count()),
+                MenuDivider::make(),
+                MenuItem::make('Event Photos', new EventPhotoResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => EventPhoto::count()),
             ]),
+
+            MenuGroup::make('Reservations', [
+                MenuItem::make('Reservations', new ReservationResource(), 'heroicons.outline.users')
+                    ->blank(fn() => false)
+                    ->badge(fn() => Reservation::count()),
+                MenuDivider::make(),
+
+            ]),
+
         ];
     }
 

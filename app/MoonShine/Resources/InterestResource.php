@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\A00Contact\Models\Country;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
@@ -13,6 +12,7 @@ use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
 use App\Models\Locale;
 use Modules\A00Contact\Enums\ContinentsEnum;
+use Modules\B00User\Models\Interest;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Json;
 use MoonShine\Fields\Text;
@@ -22,13 +22,13 @@ use MoonShine\Fields\Enum;
 use MoonShine\Fields\Relationships\BelongsTo;
 
 /**
- * @extends ModelResource<Country>
+ * @extends ModelResource<Interest>
  */
-class CountryResource extends ModelResource
+class InterestResource extends ModelResource
 {
-    protected string $model = Country::class;
+    protected string $model = Interest::class;
 
-    protected string $title = 'Countries';
+    protected string $title = 'Interests';
 
     /**
      * @return list<Field>
@@ -113,8 +113,9 @@ class CountryResource extends ModelResource
         ];
     }
 
+
     /**
-     * @param Country $item
+     * @param Interest $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

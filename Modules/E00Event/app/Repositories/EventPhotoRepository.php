@@ -2,30 +2,34 @@
 
 namespace Modules\E00Event\Repositories;
 
-class EventPhotoRepository implements EventRepositoryInterface
+use Illuminate\Database\Eloquent\Collection;
+use Modules\E00Event\Interfaces\EventPhotoRepositoryInterface;
+use Modules\E00Event\Models\EventPhoto;
+
+class EventPhotoRepository implements EventPhotoRepositoryInterface
 {
     public function index(): Collection
     {
-        return Event::all();
+        return EventPhoto::all();
     }
 
-    public function getById($id): Event
+    public function getById($id): EventPhoto
     {
-        return Event::findOrFail($id);
+        return EventPhoto::findOrFail($id);
     }
 
-    public function store(array $data): Event
+    public function store(array $data): EventPhoto
     {
-        return Event::create($data);
+        return EventPhoto::create($data);
     }
 
     public function update(array $data, $id): mixed
     {
-        return Event::whereId($id)->update($data);
+        return EventPhoto::whereId($id)->update($data);
     }
 
     public function delete($id): int
     {
-        return Event::destroy($id);
+        return EventPhoto::destroy($id);
     }
 }

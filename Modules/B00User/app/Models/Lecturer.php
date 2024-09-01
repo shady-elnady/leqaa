@@ -6,6 +6,7 @@ use Core\Models\BaseUserModel;
 // use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\B00User\Database\Factories\LecturerFactory;
+use Modules\C00Payment\Models\Transaction;
 use Modules\E00Event\Models\Event;
 use Modules\H00Chat\Models\Faq;
 
@@ -53,5 +54,10 @@ class Lecturer extends BaseUserModel
     protected static function newFactory(): LecturerFactory
     {
         return LecturerFactory::new();
+    }
+
+    public function transactions()
+    {
+        return $this->morphMany(Transaction::class, 'transactor');
     }
 }

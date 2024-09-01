@@ -5,30 +5,28 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\A00Contact\Models\Country;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
 use App\Models\Locale;
-use Modules\A00Contact\Enums\ContinentsEnum;
-use MoonShine\Fields\Image;
+use Modules\C00Payment\Enums\PaymentStatusEnum;
+use Modules\C00Payment\Models\PaymentStatus;
 use MoonShine\Fields\Json;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Select;
 use MoonShine\ActionButtons\ActionButton;
 use MoonShine\Fields\Enum;
-use MoonShine\Fields\Relationships\BelongsTo;
 
 /**
- * @extends ModelResource<Country>
+ * @extends ModelResource<PaymentStatus>
  */
-class CountryResource extends ModelResource
+class PaymentStatusResource extends ModelResource
 {
-    protected string $model = Country::class;
+    protected string $model = PaymentStatus::class;
 
-    protected string $title = 'Countries';
+    protected string $title = 'PaymentStatuses';
 
     /**
      * @return list<Field>
@@ -37,17 +35,9 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
             Text::make('Name')->nullable(),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            Enum::make('Payment Status')
+                ->attach(PaymentStatusEnum::class),
         ];
     }
 
@@ -58,16 +48,9 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            Text::make('Name')->nullable(),
+            Enum::make('Payment Status')
+                ->attach(PaymentStatusEnum::class),
             Block::make(
                 'Translations',
                 [
@@ -93,17 +76,9 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
             Text::make('Name')->nullable(),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            Enum::make('Payment Status')
+                ->attach(PaymentStatusEnum::class),
             Block::make(
                 'Translations',
                 [
@@ -113,8 +88,9 @@ class CountryResource extends ModelResource
         ];
     }
 
+
     /**
-     * @param Country $item
+     * @param PaymentStatus $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

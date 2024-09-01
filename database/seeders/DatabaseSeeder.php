@@ -43,6 +43,8 @@ class DatabaseSeeder extends Seeder
             G00NotificationDatabaseSeeder::class,
             // Module Chat
             H00ChatDatabaseSeeder::class,
+            // Moonshine User
+            MoonshineUserSeeder::class,
         ]);
     }
 }

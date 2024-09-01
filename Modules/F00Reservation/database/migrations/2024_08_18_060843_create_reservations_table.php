@@ -19,7 +19,7 @@ return new class extends BaseReservationMigration
             $table->foreignId('student_id')->constrained("{$this->user_module_dir}_students");
             $table->enum('reservation_status', ReservationStatusEnum::getValues());
             $table->text('canceled_reason')->nullable();
-            $table->double('rate')->default(0.0);
+            $table->double('rating')->default(0.0);
             $table->text('comment')->nullable();
         });
     }

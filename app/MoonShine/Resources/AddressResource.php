@@ -5,30 +5,27 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\A00Contact\Models\Country;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
 use App\Models\Locale;
-use Modules\A00Contact\Enums\ContinentsEnum;
-use MoonShine\Fields\Image;
+use Modules\A00Contact\Models\Address;
 use MoonShine\Fields\Json;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Select;
 use MoonShine\ActionButtons\ActionButton;
-use MoonShine\Fields\Enum;
 use MoonShine\Fields\Relationships\BelongsTo;
 
 /**
- * @extends ModelResource<Country>
+ * @extends ModelResource<Address>
  */
-class CountryResource extends ModelResource
+class AddressResource extends ModelResource
 {
-    protected string $model = Country::class;
+    protected string $model = Address::class;
 
-    protected string $title = 'Countries';
+    protected string $title = 'Addresses';
 
     /**
      * @return list<Field>
@@ -37,17 +34,10 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
             Text::make('Name')->nullable(),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            BelongsTo::make('Street', 'street', 'name', resource: new StreetResource()),
+            BelongsTo::make('Locality', 'locality', 'name',  resource: new LocalityResource()),
+
         ];
     }
 
@@ -58,16 +48,9 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            Text::make('Name')->nullable(),
+            BelongsTo::make('Street', 'street', 'name', resource: new StreetResource()),
+            BelongsTo::make('Locality', 'locality', 'name',  resource: new LocalityResource()),
             Block::make(
                 'Translations',
                 [
@@ -83,6 +66,17 @@ class CountryResource extends ModelResource
                         ->removable(),
                 ]
             ),
+            Json::make('Details', 'details')->keyValue(
+                keyField: Select::make('Locale', 'locale')->options(Locale::select('locale_code')->get()->mapWithKeys(function (Locale $locale) {
+                    return [$locale['locale_code'] => $locale['locale_code']];
+                })->toArray()),
+                valueField: Text::make('Translation')->required(),
+            )
+                ->creatable(
+                    limit: 5,
+                    button: ActionButton::make('Add New Translation', '#')->success()->icon('heroicons.outline.plus')->customAttributes(['class' => 'btn-lg'])
+                )
+                ->removable(),
         ];
     }
 
@@ -93,28 +87,22 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
             Text::make('Name')->nullable(),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            BelongsTo::make('Street', 'street', 'name', resource: new StreetResource()),
+            BelongsTo::make('Locality', 'locality', 'name',  resource: new LocalityResource()),
             Block::make(
                 'Translations',
                 [
                     Json::make('Translations', 'translations')->keyValue('Locale', 'Translation'),
                 ]
             ),
+            Json::make('Details', 'details')->keyValue(),
         ];
     }
 
+
     /**
-     * @param Country $item
+     * @param Address $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

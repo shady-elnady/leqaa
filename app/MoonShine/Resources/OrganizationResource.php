@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
-use Modules\A00Contact\Models\Country;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
@@ -13,6 +12,7 @@ use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
 use App\Models\Locale;
 use Modules\A00Contact\Enums\ContinentsEnum;
+use Modules\D00Organization\Models\Organization;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Json;
 use MoonShine\Fields\Text;
@@ -22,13 +22,13 @@ use MoonShine\Fields\Enum;
 use MoonShine\Fields\Relationships\BelongsTo;
 
 /**
- * @extends ModelResource<Country>
+ * @extends ModelResource<Organization>
  */
-class CountryResource extends ModelResource
+class OrganizationResource extends ModelResource
 {
-    protected string $model = Country::class;
+    protected string $model = Organization::class;
 
-    protected string $title = 'Countries';
+    protected string $title = 'Organizations';
 
     /**
      * @return list<Field>
@@ -37,17 +37,14 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
+            Image::make('logo'),
             Text::make('Name')->nullable(),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            BelongsTo::make('organization Type', 'organizationType', 'name', resource: new OrganizationTypeResource())
+                ->nullable(),
+            BelongsTo::make('University', 'university', 'name', resource: new UniversityResource())
+                ->nullable(),
+            BelongsTo::make('affiliated To', 'affiliatedTo', 'name', resource: new OrganizationResource())
+                ->nullable(),
         ];
     }
 
@@ -58,16 +55,13 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            Image::make('logo'),
+            BelongsTo::make('organization Type', 'organizationType', 'name', resource: new OrganizationTypeResource())
+                ->nullable(),
+            BelongsTo::make('University', 'university', 'name', resource: new UniversityResource())
+                ->nullable(),
+            BelongsTo::make('affiliated To', 'affiliatedTo', 'name', resource: new OrganizationResource())
+                ->nullable(),
             Block::make(
                 'Translations',
                 [
@@ -93,17 +87,14 @@ class CountryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Image'),
+            Image::make('logo'),
             Text::make('Name')->nullable(),
-            Text::make('Country Code'),
-            Text::make('Tel Code'),
-            Text::make('Mobile Number Length'),
-            Text::make('Phone Number Length'),
-            Text::make('Timezone'),
-            BelongsTo::make('Currency', 'currency', 'name', resource: new CurrencyResource()),
-            BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
-            Enum::make('Continent')
-                ->attach(ContinentsEnum::class),
+            BelongsTo::make('organization Type', 'organizationType', 'name', resource: new OrganizationTypeResource())
+                ->nullable(),
+            BelongsTo::make('University', 'university', 'name', resource: new UniversityResource())
+                ->nullable(),
+            BelongsTo::make('affiliated To', 'affiliatedTo', 'name', resource: new OrganizationResource())
+                ->nullable(),
             Block::make(
                 'Translations',
                 [
@@ -113,8 +104,9 @@ class CountryResource extends ModelResource
         ];
     }
 
+
     /**
-     * @param Country $item
+     * @param Organization $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

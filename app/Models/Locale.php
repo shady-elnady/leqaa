@@ -35,6 +35,11 @@ class Locale extends BaseModel
         return $this->belongsTo(Country::class, 'country_id');
     }
 
+    public function getFlagAttribute()
+    {
+        return $this->country->image;
+    }
+
     // public function getLocaleCodeAttribute(): string
     // {
     //     $language_code = Str::lower($this->language->language_iso_code);
