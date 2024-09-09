@@ -85,14 +85,25 @@ class BaseUserModel extends Model implements
 
     public function setPasswordAttribute($value): void
     {
-        $this->attributes['password'] = Hash::make($value);
+        $this->attributes['password'] = Hash::make(
+            $value,
+            [
+                'memory' => 1024,
+                'time' => 2,
+                'threads' => 2,
+            ],
+        );
+    }
+
+    public function getPasswordIsMatchedAtAttribute(string $inputPassword): bool
+    {
+        return Hash::check($inputPassword, $this->password);
     }
 
     public function rooms(): MorphMany
     {
         return $this->morphMany(Room::class, 'userable');
     }
-
 
     /**
      * Date functions

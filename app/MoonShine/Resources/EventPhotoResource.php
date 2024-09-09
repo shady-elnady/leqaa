@@ -15,15 +15,28 @@ use MoonShine\Fields\Image;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Number;
 use MoonShine\Fields\Relationships\BelongsTo;
+use MoonShine\Traits\Resource\ResourceWithParent;
 
 /**
  * @extends ModelResource<EventPhoto>
  */
 class EventPhotoResource extends ModelResource
 {
+    use ResourceWithParent;
+
     protected string $model = EventPhoto::class;
 
     protected string $title = 'Event Photos';
+
+    protected function getParentResourceClassName(): string
+    {
+        return EventResource::class;
+    }
+
+    protected function getParentRelationName(): string
+    {
+        return 'event';
+    }
 
     /**
      * @return list<Field>

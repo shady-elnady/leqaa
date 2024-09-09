@@ -44,7 +44,7 @@ class LocaleResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Image::make('Flag', 'flag'),
+            // Image::make('Flag', 'flag'),
             BelongsTo::make('Language', 'language', 'native_name', resource: new LanguageResource()),
             Text::make('Locale Code', 'locale_code'),
         ];

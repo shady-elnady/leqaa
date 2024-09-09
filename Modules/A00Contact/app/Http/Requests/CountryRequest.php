@@ -14,7 +14,7 @@ class CountryRequest extends BaseApiFormRequest
     {
         return [
             //
-            'timezone' => 'required|timezone:all'
+            'timezone' => 'required|timezone:all',
             'image' => ['nullable', 'extensions:jpg,png', 'mimes:jpg,bmp,png'],
             'translations' => ['required', 'json'],
 

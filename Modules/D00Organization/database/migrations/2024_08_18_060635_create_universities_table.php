@@ -14,7 +14,7 @@ return new class extends BaseOrganizationMigration
         Schema::create("{$this->base_dir}_universities", function (Blueprint $table) {
             $this->defaultColumns($table);
             $table->string('logo')->nullable();
-            $table->email('email')->nullable();
+            $table->string('email')->nullable();
             $this->translationsColumn($table);
         });
     }

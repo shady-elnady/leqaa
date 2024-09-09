@@ -23,6 +23,9 @@ use Modules\E00Event\Enums\EventStatusEnum;
 use Modules\E00Event\Enums\LecturerFinancialSystemEnum;
 use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\ActionButtons\ActionButton;
+use MoonShine\Metrics\ValueMetric;
+use MoonShine\QueryTags\QueryTag;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @extends ModelResource<Event>
@@ -164,6 +167,28 @@ class EventResource extends ModelResource
             Enum::make('Event Paid Status', 'event_paid_status')->attach(EventPaidStatusEnum::class),
             Enum::make('Event Status', 'event_status')->attach(EventStatusEnum::class),
             Date::make('Start Date', 'start_date_time')->nullable()->withTime(),
+        ];
+    }
+
+    public function metrics(): array
+    {
+        return [
+            ValueMetric::make('Events')
+                ->value(Event::count()),
+        ];
+    }
+
+    public function queryTags(): array
+    {
+        return [
+            QueryTag::make(
+                'Event Type 1', // Tag Title
+                fn(Builder $query) => $query->where('event_type_id', 1) // Query builder
+            ),
+            QueryTag::make(
+                'Event Type', // Tag Title
+                fn(Builder $query) => $query->where('event_type_id', 2) // Query builder
+            )
         ];
     }
 

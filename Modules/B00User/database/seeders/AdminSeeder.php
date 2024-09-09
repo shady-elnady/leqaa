@@ -19,7 +19,6 @@ class AdminSeeder extends Seeder
         Admin::create(
             [
                 'name' => 'Admin 1 Name',
-                'complete_name' => 'Admin 1 Complete Name',
                 'email' => 'admin1@test.com',
                 'mobile' => '01061656112',
                 'is_active' => true,
@@ -27,7 +26,7 @@ class AdminSeeder extends Seeder
                 'email_verified_at' => $timeNow,
                 'mobile_verified_at' => $timeNow,
                 'last_login' => $timeNow,
-                'password' => Hash::make('password'),
+                'password' => 'password',
                 'remember_token' => Str::random(10),
                 // 'avatar' => fake()->image(),
                 'gender' => GendersEnum::Male->value,

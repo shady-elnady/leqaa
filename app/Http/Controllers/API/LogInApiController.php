@@ -64,7 +64,17 @@ class LogInApiController extends BaseApiController
             );
         }
 
-        if (!$user->password || !Hash::check($request->password, $user->password)) {
+        if (
+            !$user->password || !Hash::check(
+                value: $request->password,
+                hashedValue: $user->password,
+                options: [
+                    'memory' => 1024,
+                    'time' => 2,
+                    'threads' => 2,
+                ],
+            )
+        ) {
             return $this->sendJsonResponse(
                 message: __('auth.failed'),
                 success: false,

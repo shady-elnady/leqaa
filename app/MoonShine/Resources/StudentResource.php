@@ -24,6 +24,7 @@ use MoonShine\Fields\Password;
 use MoonShine\Fields\Switcher;
 use MoonShine\Fields\Phone;
 use MoonShine\Fields\Email;
+use MoonShine\Fields\Relationships\HasMany;
 
 /**
  * @extends ModelResource<Student>
@@ -127,6 +128,7 @@ class StudentResource extends ModelResource
             Text::make('University Number')->nullable(),
             Switcher::make('Is Graduate')->default(false),
             Json::make('Contact Info', 'contact_info')->keyValue('Locale', 'Translation'),
+            HasMany::make('Interests', 'interests', resource: new InterestResource())
         ];
     }
 

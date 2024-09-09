@@ -40,6 +40,7 @@ class ResetPasswordController extends BaseApiController
                 ])->save();
 
                 event(new PasswordReset($user));
+                // $this->guard()->login($user);
             }
         );
 

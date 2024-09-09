@@ -69,6 +69,11 @@ class LanguageResource extends ModelResource
                     'class' => 'bgc-red'
                 ]);
             }
+            if ($cell === 1) {
+                $attr->setAttributes([
+                    'class' => 'bgc-blue'
+                ]);
+            }
 
             return $attr;
         };
