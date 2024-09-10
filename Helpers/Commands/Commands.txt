@@ -146,3 +146,12 @@ jetstream:
     php artisan vendor:publish --tag=jetstream-views
 
 
+    git clone -b AdminDashboard --single-branch https://github.com/shady-elnady/leqaa.git
+
+    git branch -a
+
+    git checkout -b AdminDashboard origin/AdminDashboard
+
+    git config --global init.defaultBranch AdminDashboard
+
+    git pull https://github.com/shady-elnady/leqaa.git AdminDashboard
