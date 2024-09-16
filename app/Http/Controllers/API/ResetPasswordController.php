@@ -20,7 +20,7 @@ class ResetPasswordController extends BaseApiController
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function __invoke(Request $request): JsonResponse
+    public function resetPassword(Request $request): JsonResponse
     {
         $request->validate([
             'token' => ['required'],

@@ -19,7 +19,7 @@ class ForgetPasswordController extends BaseApiController
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function __invoke(ForgetPasswordRequest $request): JsonResponse
+    public function forgetPassword(ForgetPasswordRequest $request): JsonResponse
     {
         switch ($request->account_type) {
             case UserTypesEnum::User:

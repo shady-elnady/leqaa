@@ -17,7 +17,7 @@ use Modules\B00User\Models\Student;
 
 class PasswordApiController extends BaseApiController
 {
-    public function change(Request $request)
+    public function changePassword(Request $request)
     {
         $user = auth()->user();
 

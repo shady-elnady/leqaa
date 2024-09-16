@@ -18,7 +18,7 @@ use App\Http\Resources\UserResource;
 class LogInApiController extends BaseApiController
 {
 
-    public function __invoke(LoginRequest $request)
+    public function logIn(LoginRequest $request)
     {
         $validatedData = $request->validated();
 

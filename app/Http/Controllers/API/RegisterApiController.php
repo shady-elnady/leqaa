@@ -24,7 +24,7 @@ class RegisterApiController extends BaseApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(RegisterRequest $request): JsonResponse
+    public function register(RegisterRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
 

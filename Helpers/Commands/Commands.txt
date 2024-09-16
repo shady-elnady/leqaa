@@ -155,3 +155,14 @@ jetstream:
     git config --global init.defaultBranch AdminDashboard
 
     git pull https://github.com/shady-elnady/leqaa.git AdminDashboard
+
+
+    /usr/local/bin/ea-php82 composer.phar install
+    composer global require laravel/installer
+    /usr/local/bin/ea-php82 composer.phar global require laravel/installer
+
+
+    git remote add origin https://github.com/octocat/Spoon-Knife.git
+
+
+    git remote add AdminDashboard https://github.com/shady-elnady/leqaa.git

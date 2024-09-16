@@ -13,29 +13,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::post('register', RegisterApiController::class);
+Route::post('register', [RegisterApiController::class, 'register']);
 
-Route::post('login', LogInApiController::class);
+Route::post('login', [LogInApiController::class, 'logIn']);
 
 Route::prefix('password')->group(function () {
-    Route::post('forget', ForgetPasswordController::class);
-    Route::post('verify', VerifyPasswordController::class);
+    Route::post('forget', [ForgetPasswordController::class, 'forgetPassword']);
+    Route::post('verify', [VerifyPasswordController::class, 'verifyPassword']);
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::middleware([IsActive::class])->group(function () {
-        Route::post('logout', LogOutApiController::class);
+        Route::post('logout', [LogOutApiController::class, 'logOut']);
 
         // Route::post('upload', [MediaController::class, 'upload']);
 
         // Route::post('my-phone/get-otp', [ProfileController::class, 'getOtp']);
         // Route::post('my-phone/update', [ProfileController::class, 'updatePhone']);
 
-        Route::post('resend-otp', VerificationController::class);
+        Route::post('resend-otp', [VerificationController::class, 'verfication']);
 
         Route::prefix('password')->group(function () {
-            Route::post('change', [PasswordApiController::class, 'change']);
-            Route::post('reset', ResetPasswordController::class);
+            Route::post('change', [PasswordApiController::class, 'changePassword']);
+            Route::post('reset', [ResetPasswordController::class, 'resetPassword']);
         });
     });
 });

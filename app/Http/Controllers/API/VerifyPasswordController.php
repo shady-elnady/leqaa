@@ -20,7 +20,7 @@ class VerifyPasswordController extends BaseApiController
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function __invoke(VerifyOTPRequest $request): JsonResponse
+    public function verifyPassword(VerifyOTPRequest $request): JsonResponse
     {
         switch ($request->account_type) {
             case UserTypesEnum::User:

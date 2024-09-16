@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LogOutApiController extends BaseApiController
 {
-    public function __invoke()
+    public function logOut()
     {
         auth()->user()->currentAccessToken()->delete();
         // auth()->user()->tokens()->delete();

@@ -14,7 +14,7 @@ use App\Models\User;
 
 class VerificationController extends BaseApiController
 {
-    public function __invoke(ApiResendOTPRequest $request)
+    public function verfication(ApiResendOTPRequest $request)
     {
         $user = auth()->user();
 
